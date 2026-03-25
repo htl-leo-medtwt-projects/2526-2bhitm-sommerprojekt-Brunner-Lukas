@@ -1,0 +1,63 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+}
+
+#background{
+    background-image: url(../img/startSeite/background.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+#Logo{
+    background-image: url(../img/startSeite/Logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 35%;
+    width: 35%;
+    position: absolute;
+    top: 2%;
+    left: 31%;
+}
+
+#start-button{
+    background-image: url(../img/startSeite/StartButton.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 30%;
+    width: 40%;
+    position: absolute;
+    top: 30%;
+    left: 28%;
+}
+
+#leaderboard-button{
+    background-image: url(../img/startSeite/LeaderboardButton.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 30%;
+    width: 40%;
+    position: absolute;
+    top: 45%;
+    left: 28%;
+}
+
+#howTo-button{
+    background-image: url(../img/startSeite/HowToButton.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 30%;
+    width: 40%;
+    position: absolute;
+    top: 60%;
+    left: 28%;
+}   
