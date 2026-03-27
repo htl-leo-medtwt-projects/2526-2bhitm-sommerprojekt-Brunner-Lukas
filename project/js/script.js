@@ -4,11 +4,11 @@ function openHowTo(){
         <div id="HowToBox"></div>
         <div id="HowToBox1"></div>
         <div id="HowToBox2"></div>
-        <div id="Back-Button" onclick="BackToStart()"></div>
+        <div id="Back-Button" onclick="backToStart()"></div>
     </div>`;
 }
 
-function BackToStart(){
+function backToStart(){
     document.body.innerHTML =
     `<div id="background">
         <div id="Logo"></div>
