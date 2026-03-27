@@ -60,4 +60,55 @@ body{
     position: absolute;
     top: 60%;
     left: 28%;
-}   
+}
+
+#HowToBox{
+    background-image: url(../img/HowTo/HowToBox.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 50%;
+    width: 50%;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 10%;
+    left: -5%;
+}
+
+#HowToBox1{
+    background-image: url(../img/HowTo/HowToBox.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 50%;
+    width: 50%;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 10%;
+    left: 25%;
+}
+
+#HowToBox2{
+    background-image: url(../img/HowTo/HowToBox.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 50%;
+    width: 50%;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 10%;
+    left: 55%;
+}
+
+#Back-Button{
+    background-image: url(../img/HowTo/BackButton.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 40%;
+    width: 40%;
+    position: absolute;
+    top: 70%;
+    left: 30%;
+}
