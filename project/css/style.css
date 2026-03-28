@@ -112,3 +112,45 @@ body{
     top: 70%;
     left: 30%;
 }
+
+#tag{
+    background-image: url(../img/leaderboard/LeaderboardTag.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 30%;
+    width: 30%;
+    position: absolute;
+    left: 35%;
+}
+
+#leaderboard{
+width: 60%;
+height: 60%;
+top: 20%;
+left: 20%;
+position: absolute;
+}
+
+#back{
+    background-image: url(../img/Leaderboard/BackButton.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 40%;
+    width: 40%;
+    position: absolute;
+    top: 70%;
+    left: 30%;
+}
+
+#leaderboardStand{
+    background-image: url(../img/leaderboard/Leaderboard.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: -20%;
+}

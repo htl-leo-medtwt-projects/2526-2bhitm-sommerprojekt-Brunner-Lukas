@@ -17,3 +17,16 @@ function backToStart(){
         <div id="howTo-button" onclick="openHowTo()"></div>
     </div>`;
 }
+
+function openLeaderBoard(){
+    document.body.innerHTML =
+    `<div id="background">
+        <div id="tag"></div>
+        <div id="leaderboard">
+            <div id="leaderboardStand"></div>
+            <div id="leaderboardText">
+            </div>
+        </div>
+        <div id="back" onclick="backToStart()"></div>
+    </div>`;
+}
