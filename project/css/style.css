@@ -14,6 +14,13 @@ body{
     width: 100%;
 }
 
+#backgroundStart{
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
 #Logo{
     background-image: url(../img/startSeite/Logo.png);
     background-size: contain;
@@ -153,4 +160,13 @@ position: absolute;
     height: 100%;
     width: 100%;
     top: -20%;
+}
+
+#typedOutput{
+    position: absolute;
+    top: 10%;
+    left:10%;
+    font-size: 2em;
+    color: white;
+    font-family: Share Tech Mono, monospace;
 }
