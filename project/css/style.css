@@ -169,4 +169,131 @@ position: absolute;
     font-size: 2em;
     color: white;
     font-family: Share Tech Mono, monospace;
+    padding-right: 10%;
+}
+
+#backgroundFirstRoom{
+    background-image: url(../img/Räume/room1/BackgroundRoom1.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+#userNameInput{
+    position: absolute;
+    top: 35%;
+    left: 33%;
+    width: 30.625rem;
+    height: 3.25rem;
+    color: white;
+    font-family: Share Tech Mono, monospace;
+    font-size: 2.25rem;
+    background-color: black;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    outline: none;
+    padding: 0 1rem;
+
+}
+
+#passwordInput{
+    position: absolute;
+    top: 45%;
+    left: 33%;
+    width: 30.625rem;
+    height: 3.25rem;
+    color: white;
+    font-family: Share Tech Mono, monospace;
+    font-size: 2.25rem;
+    background-color: black;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    outline: none;
+    padding: 0 1rem;
+}
+
+#loginButton{
+    background-image: url(../img/Räume/room1/LoginButton.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 20%;
+    width: 30%;
+    position: absolute;
+    top: 50%;
+    left: 35%;
+}
+
+#logo{
+    background-image: url(../img/Räume/room1/logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 30%;
+    width: 30%;
+    position: absolute;
+    top: -3%;
+    left: 35%;
+}
+
+#console{
+    background-color: darkgreen;
+    border: 1px solid black;
+    border-radius: 5px;
+    position: absolute;
+    top: 6%;
+    left: 88%;
+    height: 5%;
+    width: 5%;
+    font-family: Share Tech Mono, monospace;
+    color: white;
+}
+
+#error{
+    position: absolute;
+    top: 42%;
+    left: 35%;
+    font-size: 1em;
+    color: red;
+    font-family: Share Tech Mono, monospace;
+}
+
+#text {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    font-size: 1.5em;
+    color: white;
+    font-family: Share Tech Mono, monospace;
+}
+
+#consoleOpen{
+    background-image: url(../img/Räume/room1/Console.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 6%;
+    left: 70%;
+    height: 30%;
+    width: 30%;
+}
+
+#consoleInput{
+    position: absolute;
+    top: 15%;
+    left: 14%;
+    width: 90%;
+    height: 75%;
+    color: lime;
+    font-family: Share Tech Mono, monospace;
+    font-size: 0.55rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    overflow-y: auto;
+    white-space: pre; /* Wichtig für Zeilenumbrüche! */
 }
