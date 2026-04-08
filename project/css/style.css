@@ -295,5 +295,4 @@ position: absolute;
     outline: none;
     padding: 0.5rem;
     overflow-y: auto;
-    white-space: pre; /* Wichtig für Zeilenumbrüche! */
 }
