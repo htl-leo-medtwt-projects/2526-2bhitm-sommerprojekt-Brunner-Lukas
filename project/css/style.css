@@ -296,3 +296,62 @@ position: absolute;
     padding: 0.5rem;
     overflow-y: auto;
 }
+
+#backgroundSecondRoom{
+    background-image: url(../img/Räume/room2/background.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
+
+#container{
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#picture1{
+    background-image: url(../img/Räume/room2/picture1.png);
+    height: 100%;
+    width: 100%;
+}
+
+#picture2{
+    background-image: url(../img/Räume/room2/picture2.png);
+    height: 100%;
+    width: 100%;
+}
+
+#picture3{
+    background-image: url(../img/Räume/room2/picture3.png);
+    height: 100%;
+    width: 100%;
+}
+
+#picture4{
+    background-image: url(../img/Räume/room2/picture4.png);
+    height: 100%;
+    width: 100%;
+}
+
+#picture5{
+    background-image: url(../img/Räume/room2/picture5.png);
+    height: 100%;
+    width: 100%;
+}
+
+#picture6{
+    background-image: url(../img/Räume/room2/picture6.png);
+    height: 100%;
+    width: 100%;
+}
+
