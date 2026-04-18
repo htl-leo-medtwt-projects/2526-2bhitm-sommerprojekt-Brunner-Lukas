@@ -401,3 +401,66 @@ position: absolute;
   right: 5%;
 }
 
+#profilePicture{
+    width: 100px;
+    height: 100px;
+    background-image: url(../img/Räume/room2/ProfilePicture.jpeg);
+    background-size: 135% 135%;
+    background-position: center;
+    position: absolute;
+    border-radius: 50%;
+    top: 18%;
+    left: 28%;
+}
+
+#profileName{
+    position: absolute;
+    top: 20%;
+    left: 35%;
+    font-size: 1.5em;
+    color: white;
+    font-family: Share Tech Mono, monospace;
+}
+
+#CodeInput{
+    position: absolute;
+    top: 60%;
+    left: 28%;
+    width: 30.625rem;
+    height: 3.25rem;
+}
+
+#codeInputField{
+    width: auto;
+    height: auto;
+    color: white;
+    font-family: Share Tech Mono, monospace;
+    font-size: 2.25rem;
+    background-color: black;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    outline: none;
+    padding: 0 1rem;
+}
+
+#submitCodeButton{
+    font-family: Share Tech Mono, monospace;
+    color: white;
+    background-color: black;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    padding: 0rem 1rem;
+}
+
+#BackButton{
+    background-image: url(../img/HowTo/BackButton.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 20%;
+    width: 30%;
+    position: absolute;
+    top: 70%;
+    left: 35%;
+}
+
