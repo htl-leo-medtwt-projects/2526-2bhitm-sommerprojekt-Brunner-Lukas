@@ -464,3 +464,81 @@ position: absolute;
     left: 35%;
 }
 
+#backgroundThirdRoom{
+    background-image: url(../img/Räume/room3/backgroundRoom3.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+}
+
+#firstRiddle{
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    font-size: 1.5em;
+    width: 20%;
+    color: white;
+    font-family: Share Tech Mono, monospace;
+}
+
+#secondRiddle{
+    position: absolute;
+    top: 35%;
+    left: 65%;
+    font-size: 0.9em;
+    width: 20%;
+    color: white;
+    font-family: Share Tech Mono, monospace;
+}
+
+#firstStickyNote{
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    width: 10%;
+    height: 10%;
+    background-image: url(../img/Räume/room3/StickyNode.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#secondStickyNote{
+    position: absolute;
+    top: 60%;
+    left: 80%;
+    width: 10%;
+    height: 10%;
+    background-image: url(../img/Räume/room3/StickyNode.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#StickyNoteTip1{
+    background-image: url(../img/Räume/room3/StickyNode.png);
+    top: 10%;
+    left: 10%;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    font-family: Share Tech Mono, monospace;
+    font-size: 0.5em;
+    text-align: center;
+    
+}
+
+#text{
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    width: 40%;
+    color: black;
+}
+
