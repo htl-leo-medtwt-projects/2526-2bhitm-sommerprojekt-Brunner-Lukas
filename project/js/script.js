@@ -65,10 +65,10 @@ function StartFirstLevel(){
     `<div id="backgroundFirstRoom">
         <div id="firstLevel"></div>
         <div id="logo"></div>
-        <div id="text">Login to your account</div>
+        <div id="textFirstLevel">Login to your account</div>
         <input type="text" id="userNameInput" placeholder="Username">
         <input type="text" id="passwordInput" placeholder="Password">
-        <div id="loginButton" onclick="getError()"></div>
+        <div id="loginButton" onclick="getError()" onclick="saveUsername()"></div>
     </div>`;
 }
 
@@ -131,3 +131,8 @@ function checkPassword(){
         StartSecondLevel();
     }
 }
+
+function saveUsername(){
+    let name = document.getElementById("userNameInput").value;
+    localStorage.setItem("playerName", name);
+}  
