@@ -295,6 +295,9 @@ position: absolute;
     outline: none;
     padding: 0.5rem;
     overflow-y: auto;
+    #consoleInput {
+    white-space: pre;
+}
 }
 
 #backgroundSecondRoom{
