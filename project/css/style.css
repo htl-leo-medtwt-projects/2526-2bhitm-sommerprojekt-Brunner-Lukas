@@ -545,3 +545,11 @@ position: absolute;
     color: black;
 }
 
+#backgroundFinish{
+    background-image: url(../img/finish/20260317_1527_Cinematic\ Escape\ Success_simple_compose_01kky3346mew4rhdbnbjwxz5b9.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+}

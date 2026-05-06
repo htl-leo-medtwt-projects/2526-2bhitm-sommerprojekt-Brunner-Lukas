@@ -148,7 +148,6 @@ function checkPassword(){
     
     if (password === "password123"){
         finishGame();
-     //   StartSecondLevel();
     }
 }
 
@@ -219,25 +218,13 @@ function showComplete() {
     let timeText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
     
     document.body.innerHTML = `
-        <div id="background">
-            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-                        background: rgba(0, 0, 0, 0.95); border: 4px solid #00ff41; border-radius: 20px; 
-                        padding: 50px; text-align: center; box-shadow: 0 0 50px rgba(0, 255, 65, 0.8);">
-                <h2 style="font-size: 48px; color: #00ff41; margin-bottom: 20px; text-shadow: 0 0 20px #00ff41;">
-                    GESCHAFFT!
-                </h2>
-                <div style="font-size: 56px; font-family: 'Courier New', monospace; margin: 30px 0; 
-                            color: #ffd700; text-shadow: 0 0 20px #ffd700;">
-                    ${timeText}
-                </div>
-                <p style="font-size: 18px; color: #00ff41;">Zeit übrig</p>
+        <div id="backgroundFinish">
                 <button onclick="openLeaderBoard()" 
                         style="background: rgba(0, 0, 0, 0.8); border: 3px solid #00ff41; 
                                border-radius: 10px; padding: 15px 40px; margin-top: 30px; 
                                font-size: 18px; font-weight: bold; color: #00ff41; cursor: pointer;">
                     Zum Leaderboard
                 </button>
-            </div>
         </div>
     `;
 }
