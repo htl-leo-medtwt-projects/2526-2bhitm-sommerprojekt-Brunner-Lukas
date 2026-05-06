@@ -10,7 +10,6 @@
 
 ## Ziele
 
-- Timer verschieben
 - leaderboard ein bisl fixen
 - Raum 3 fertig
 - How to Text schreiben
