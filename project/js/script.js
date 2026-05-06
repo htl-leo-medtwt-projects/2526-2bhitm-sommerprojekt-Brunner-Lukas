@@ -147,7 +147,8 @@ function checkPassword(){
     let password = document.getElementById("passwordInput").value;
     
     if (password === "password123"){
-        finishGame();
+        StartSecondLevel();
+        //finishGame();
     }
 }
 
@@ -254,64 +255,40 @@ function loadLeaderboard() {
     let scores = JSON.parse(localStorage.getItem('scores') || '[]');
     let text = document.getElementById('leaderboardText');
     if (!text) return;
-    
+
+    const podiumClasses = ['podium-1', 'podium-2', 'podium-3'];
     let html = '';
-    
+
     for (let i = 0; i < 3; i++) {
-        let pos = i === 0 ? 'top: 28%; left: 50%;' : 
-                  i === 1 ? 'top: 35%; left: 20%;' : 
-                            'top: 35%; left: 80%;';
-        
-        let color = i === 0 ? '#ffd700' : i === 1 ? '#c0c0c0' : '#cd7f32';
-        
-        if (scores[i]) {
-            let min = Math.floor(scores[i].time / 60);
-            let sec = scores[i].time % 60;
-            let timeText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-            
-            html += `
-                <div style="position: absolute; ${pos} transform: translateX(-50%); text-align: center;">
-                    <div style="font-size: 20px; font-weight: bold; color: ${color}; 
-                                text-shadow: 0 0 10px ${color}; margin-bottom: 8px; max-width: 150px;">
-                        ${scores[i].name}
-                    </div>
-                    <div style="font-size: 24px; color: ${color}; text-shadow: 0 0 15px ${color}; 
-                                font-family: 'Courier New', monospace; font-weight: bold;">
-                        ${timeText}
-                    </div>
-                </div>
-            `;
-        }
+        if (!scores[i]) continue;
+        const min = Math.floor(scores[i].time / 60);
+        const sec = scores[i].time % 60;
+        const timeText = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+
+        html += `
+            <div class="podium-entry ${podiumClasses[i]}">
+                <div class="podium-name">${scores[i].name}</div>
+                <div class="podium-time">${timeText}</div>
+            </div>
+        `;
     }
-    
+
     for (let i = 3; i < 5; i++) {
-        if (scores[i]) {
-            let min = Math.floor(scores[i].time / 60);
-            let sec = scores[i].time % 60;
-            let timeText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-            let topPos = i === 3 ? '75%' : '85%';
-            
-            html += `
-                <div style="position: absolute; top: ${topPos}; left: 50%; transform: translateX(-50%);
-                            background: rgba(0, 0, 0, 0.7); border: 2px solid #00ff41; border-radius: 10px;
-                            padding: 10px 20px; display: flex; align-items: center; gap: 20px; min-width: 400px;
-                            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);">
-                    <div style="font-size: 28px; font-weight: bold; color: #00ff41; min-width: 40px;">
-                        ${i + 1}.
-                    </div>
-                    <div style="flex: 1;">
-                        <div style="font-size: 18px; font-weight: bold; color: #00ff41; margin-bottom: 5px;">
-                            ${scores[i].name}
-                        </div>
-                        <div style="font-size: 16px; font-family: 'Courier New', monospace; color: #00ff41;
-                                    text-shadow: 0 0 8px #00ff41;">
-                            ${timeText}
-                        </div>
-                    </div>
+        if (!scores[i]) continue;
+        const min = Math.floor(scores[i].time / 60);
+        const sec = scores[i].time % 60;
+        const timeText = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+
+        html += `
+            <div class="list-entry list-entry-${i + 1}">
+                <div class="list-rank">${i + 1}.</div>
+                <div>
+                    <div class="list-name">${scores[i].name}</div>
+                    <div class="list-time">${timeText}</div>
                 </div>
-            `;
-        }
+            </div>
+        `;
     }
-    
+
     text.innerHTML = html;
 }

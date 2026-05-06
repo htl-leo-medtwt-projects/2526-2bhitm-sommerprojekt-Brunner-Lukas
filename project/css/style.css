@@ -553,3 +553,363 @@ position: absolute;
     height: 100vh;
     width: 100%;
 }
+
+#leaderboardText {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.podium-entry {
+    position: absolute;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.podium-name {
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 0 0 10px currentColor;
+    margin-bottom: 3px;
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.podium-time {
+    font-size: 20px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-shadow: 0 0 15px currentColor;
+}
+
+.podium-1 {
+    top: 3%;
+    left: 50%;
+    color: #ffd700;
+}
+
+.podium-2 {
+    top: 18%;
+    left: 35%;
+    color: #c0c0c0;
+}
+
+.podium-3 {
+    top: 20%;
+    left: 67%;
+    color: #cd7f32;
+}
+
+.list-entry {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    border: 2px solid #00ff41;
+    border-radius: 10px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 380px;
+    box-sizing: border-box;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    z-index: 10;
+}
+
+.list-entry-4 {
+    top: 58%;
+}
+
+.list-entry-5 {
+    top: 70%;
+}
+
+.list-rank {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ff41;
+    min-width: 36px;
+    flex-shrink: 0;
+}
+
+.list-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #00ff41;
+    margin-bottom: 3px;
+}
+
+.list-time {
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    color: #00ff41;
+    text-shadow: 0 0 8px #00ff41;
+}
+
+#backgroundThirdRoom {
+    background-image: url(../img/Räume/room3/backgroundRoom3.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+}
+
+#firstRiddle {
+    position: absolute;
+    top: 30%;
+    left: 15%;
+    font-size: 1.5em;
+    width: 20%;
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+#firstRiddle h2 {
+    margin: 4px 0;
+}
+
+#secondRiddle {
+    position: absolute;
+    top: 28%;
+    left: 62%;
+    width: 22%;
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+#secondRiddle pre {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.78rem;
+    color: white;
+    margin: 0;
+    white-space: pre;
+    line-height: 1.6;
+}
+
+#firstStickyNote {
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    width: 10%;
+    height: 10%;
+    background-image: url(../img/Räume/room3/StickyNode.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 5;
+}
+
+#secondStickyNote {
+    position: absolute;
+    top: 60%;
+    left: 80%;
+    width: 10%;
+    height: 10%;
+    background-image: url(../img/Räume/room3/StickyNode.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 5;
+}
+
+#hiddenAsciiNote {
+    position: absolute;
+    top: 18%;
+    right: 6%;
+    width: 3.5%;
+    height: 6%;
+    background-image: url(../img/Räume/room3/StickyNode.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 5;
+    opacity: 0.35;
+    transform: rotate(12deg);
+    filter: brightness(0.6) sepia(0.4);
+}
+
+#hiddenAsciiNote:hover {
+    opacity: 0.55;
+}
+
+#StickyNoteTip1 {
+    background-image: url(../img/Räume/room3/StickyNode.png);
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35%;
+    height: 70%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+
+#text {
+    position: absolute;
+    top: 18%;
+    left: 12%;
+    width: 76%;
+    color: #1a1a00;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.5;
+}
+
+#text p {
+    margin: 0 0 6px 0;
+}
+
+#closeTip {
+    font-size: 0.75rem;
+    color: #3a2a00;
+    cursor: pointer;
+    margin-bottom: 8px;
+    text-decoration: underline;
+}
+
+#closeTip:hover {
+    color: #000;
+}
+
+#codeInputArea {
+    position: absolute;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 20;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#codeInputLabel,
+#codeInputLabel2 {
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ff41;
+    font-size: 0.85rem;
+    text-shadow: 0 0 8px #00ff41;
+    white-space: nowrap;
+}
+
+#binaryAnswer,
+#serverCode {
+    width: 120px;
+    height: 2.2rem;
+    background-color: black;
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+    color: #00ff41;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    padding: 0 0.5rem;
+    outline: none;
+    text-transform: uppercase;
+}
+
+#submitThirdLevel {
+    height: 2.4rem;
+    padding: 0 1.2rem;
+    background-color: black;
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+    color: #00ff41;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#submitThirdLevel:hover {
+    background-color: #003300;
+}
+
+#thirdLevelError {
+    width: 100%;
+    text-align: center;
+    color: red;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    min-height: 1.2rem;
+}
+
+#asciiOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.88);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+#asciiOverlayContent {
+    background: #050f05;
+    border: 2px solid #00ff41;
+    border-radius: 8px;
+    padding: 24px 32px;
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#asciiOverlayTitle {
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ff41;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 14px;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #00ff41;
+}
+
+#asciiOverlayTable {
+    border-collapse: collapse;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.78rem;
+    color: #00ff41;
+}
+
+#asciiOverlayTable th {
+    border-bottom: 1px solid #00ff41;
+    padding: 5px 14px;
+    color: #ffd700;
+    text-align: left;
+}
+
+#asciiOverlayTable td {
+    padding: 4px 14px;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.12);
+}
+
+#asciiOverlayTable tr:hover td {
+    background: rgba(0, 255, 65, 0.07);
+}
+
+#asciiOverlayClose {
+    font-family: 'Share Tech Mono', monospace;
+    color: #ff4444;
+    text-align: center;
+    margin-top: 16px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#asciiOverlayClose:hover {
+    text-shadow: 0 0 8px #ff4444;
+}
