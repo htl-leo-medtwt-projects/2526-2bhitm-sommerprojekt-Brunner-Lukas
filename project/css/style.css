@@ -913,3 +913,389 @@ position: absolute;
 #asciiOverlayClose:hover {
     text-shadow: 0 0 8px #ff4444;
 }
+
+#backgroundFourthRoom{
+    background-image: url(../img/Räume/room4/BackgroundRoom4.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    overflow: hidden;
+}
+
+#pcLeft{
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    height: 25%;
+    width: 29%;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    text-align: center;
+    padding-top: 1%;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+#pcCenter{
+    position: absolute;
+    top: 50%;
+    left: 39%;
+    height: 25%;
+    width: 21%;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    text-align: center;
+    padding-top: 1%;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+#pcRight{
+    position: absolute;
+    top: 50%;
+    left: 66%;
+    height: 25%;
+    width: 29%;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    text-align: center;
+    padding-top: 1%;
+    background-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+#room4ComputerOverlay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 100;
+}
+
+#room4Computer{
+    position: absolute;
+    top: 6%;
+    left: 7%;
+    height: 86%;
+    width: 86%;
+    background-color: #020805;
+    border: 2px solid #00ff41;
+    border-radius: 5px;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+}
+
+#room4ComputerTop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 8%;
+    width: 100%;
+    border-bottom: 1px solid darkgreen;
+    background-color: rgba(0, 255, 65, 0.08);
+}
+
+#room4ComputerTitle{
+    position: absolute;
+    top: 28%;
+    left: 2%;
+    font-size: 1.2em;
+}
+
+#room4Close{
+    position: absolute;
+    top: 20%;
+    right: 2%;
+    height: 40%;
+    width: 3%;
+    color: red;
+    border: 1px solid red;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#room4QuestNav{
+    position: absolute;
+    top: 11%;
+    left: 3%;
+    width: 60%;
+    display: block;
+}
+
+.room4QuestTab{
+    display: inline-block;
+    min-width: 12%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    padding: 0.5rem;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    background-color: black;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    text-align: center;
+    cursor: pointer;
+}
+
+.activeQuest{
+    background-color: darkgreen;
+}
+
+.solvedQuest{
+    color: #ffd700;
+    border-color: #ffd700;
+}
+
+#room4QuestBox{
+    position: absolute;
+    top: 21%;
+    left: 3%;
+    height: 70%;
+    width: 60%;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    background-color: black;
+    padding: 1rem;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+#room4QuestBox h2{
+    color: #ffd700;
+    font-size: 1.3em;
+    font-weight: normal;
+    margin-top: 0;
+}
+
+#room4QuestBox p{
+    color: white;
+    line-height: 1.5;
+}
+
+#room4CodeBox{
+    position: absolute;
+    top: 11%;
+    right: 3%;
+    height: 80%;
+    width: 29%;
+    border: 1px solid darkgreen;
+    border-radius: 5px;
+    background-color: black;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+#room4CodeBox h3{
+    color: #ffd700;
+    font-weight: normal;
+    margin-top: 0;
+}
+
+#room4CodeBox p{
+    color: white;
+}
+
+#room4CodePart{
+    position: absolute;
+    top: 35%;
+    left: 8%;
+    width: 84%;
+    min-height: 30%;
+    border: 1px dashed darkgreen;
+    border-radius: 5px;
+    color: #00ff41;
+    font-size: 2.5em;
+    text-align: center;
+    padding-top: 18%;
+    box-sizing: border-box;
+}
+
+.room4Pieces{
+    margin-top: 1.5rem;
+}
+
+.room4Piece{
+    display: inline-block;
+    margin: 0.3rem;
+    padding: 0.6rem;
+    background-color: #050f05;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    color: #00ff41;
+    cursor: grab;
+}
+
+.room4Slots{
+    margin-top: 1rem;
+}
+
+.room4Slot{
+    display: inline-block;
+    min-height: 3rem;
+    min-width: 7rem;
+    margin: 0.3rem;
+    padding: 0.6rem;
+    border: 1px dashed darkgreen;
+    border-radius: 4px;
+    color: darkgreen;
+    text-align: center;
+    vertical-align: top;
+}
+
+.slotFilled{
+    color: white;
+    border-style: solid;
+}
+
+.room4Check{
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.4rem;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    background-color: black;
+    color: #00ff41;
+    cursor: pointer;
+}
+
+#room4Answer{
+    margin-top: 1.5rem;
+    width: 50%;
+    height: 2.3rem;
+    background-color: black;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    font-size: 1rem;
+    padding: 0 0.7rem;
+    outline: none;
+}
+
+#room4Error{
+    color: red;
+    margin-top: 1rem;
+    min-height: 1.2rem;
+}
+
+.room4Choices{
+    margin-top: 1.5rem;
+}
+
+.room4Choice{
+    display: inline-block;
+    min-width: 5rem;
+    margin: 0.3rem;
+    padding: 0.7rem;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    background-color: black;
+    color: #00ff41;
+    text-align: center;
+    cursor: pointer;
+}
+
+#cssButton{
+    display: inline-block;
+    margin-top: 1.5rem;
+    height: 3rem;
+    min-width: 10rem;
+    border: 1px dashed darkgreen;
+    border-radius: 4px;
+    color: white;
+    opacity: 0.2;
+    text-align: center;
+    padding-top: 1rem;
+}
+
+#cssList{
+    margin-top: 1rem;
+    color: white;
+}
+
+#booleanBox{
+    margin-top: 1.5rem;
+}
+
+#booleanBox label{
+    display: inline-block;
+    margin-right: 1rem;
+    padding: 0.7rem;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    color: white;
+}
+
+#logicText{
+    margin-top: 1rem;
+    color: #ffd700;
+}
+
+#colorPreview{
+    margin-top: 1.5rem;
+    height: 5rem;
+    width: 12rem;
+    background-color: #00ff00;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    color: black;
+    text-align: center;
+    padding-top: 2rem;
+    box-sizing: border-box;
+}
+
+#zStack{
+    position: relative;
+    margin-top: 1.5rem;
+    height: 11rem;
+    width: 16rem;
+}
+
+#numberLayer{
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    height: 5rem;
+    width: 8rem;
+    z-index: 1;
+    background-color: #ffd700;
+    color: black;
+    font-size: 2rem;
+    text-align: center;
+    padding-top: 1.5rem;
+    box-sizing: border-box;
+}
+
+#middleLayer{
+    position: absolute;
+    top: 1.5rem;
+    left: 3rem;
+    height: 5rem;
+    width: 8rem;
+    z-index: 2;
+    background-color: darkgreen;
+}
+
+#frontLayer{
+    position: absolute;
+    top: 0;
+    left: 6rem;
+    height: 5rem;
+    width: 8rem;
+    z-index: 3;
+    background-color: black;
+    border: 1px solid darkgreen;
+}
