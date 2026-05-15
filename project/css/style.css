@@ -181,6 +181,131 @@ position: absolute;
     width: 100%;
 }
 
+#room1InfoButton{
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    width: 64px;
+    height: 64px;
+    border: 2px solid #00ff41;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.88);
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    font-size: 2.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 0 0 14px #00ff41;
+    box-shadow: 0 0 22px rgba(0, 255, 65, 0.45);
+    z-index: 9998;
+}
+
+#room1InfoButton:hover{
+    background: rgba(0, 255, 65, 0.16);
+    box-shadow: 0 0 32px rgba(0, 255, 65, 0.7);
+}
+
+#room1InfoOverlay{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.72);
+    z-index: 10000;
+    box-sizing: border-box;
+}
+
+#room1InfoPanel{
+    position: relative;
+    width: min(720px, 92vw);
+    max-height: 86vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 2rem;
+    border: 2px solid #00ff41;
+    border-radius: 8px;
+    background: rgba(2, 8, 5, 0.96);
+    color: white;
+    font-family: Share Tech Mono, monospace;
+    line-height: 1.45;
+    box-shadow: 0 0 38px rgba(0, 255, 65, 0.38);
+}
+
+#room1InfoClose{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #00ff41;
+    border-radius: 5px;
+    background: black;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#room1InfoClose:hover,
+#room1TipButton:hover{
+    background: #00ff41;
+    color: black;
+}
+
+.room1InfoKicker{
+    margin: 0 0 0.4rem;
+    color: #00ff41;
+    text-transform: uppercase;
+    letter-spacing: 0;
+}
+
+#room1InfoPanel h2,
+#room1InfoPanel h3{
+    margin: 0 0 1rem;
+    color: #00ff41;
+    text-shadow: 0 0 12px rgba(0, 255, 65, 0.65);
+}
+
+#room1InfoPanel h3{
+    margin-top: 1.6rem;
+    font-size: 1.1rem;
+}
+
+#room1InfoPanel p{
+    margin: 0.75rem 0;
+}
+
+.systemHint{
+    padding: 1rem;
+    border-left: 3px solid #00ff41;
+    background: rgba(0, 255, 65, 0.08);
+    color: #dfffe8;
+}
+
+#room1TipBox{
+    margin-top: 1.6rem;
+    padding-top: 1rem;
+    border-top: 1px dashed darkgreen;
+}
+
+#room1TipButton{
+    border: 1px solid #00ff41;
+    border-radius: 5px;
+    background: black;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    font-size: 1rem;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+}
+
+#room1TipText{
+    min-height: 3.2rem;
+    color: #dfffe8;
+}
+
 #userNameInput{
     position: absolute;
     top: 35%;
@@ -1108,19 +1233,49 @@ position: absolute;
     color: white;
 }
 
-#room4CodePart{
+#room4CodeParts{
     position: absolute;
-    top: 35%;
+    top: 28%;
     left: 8%;
     width: 84%;
-    min-height: 30%;
+}
+
+.room4CodePart{
+    display: flex;
+    justify-content: space-between;
+    gap: 0.7rem;
+    margin-bottom: 0.6rem;
+    padding: 0.75rem;
     border: 1px dashed darkgreen;
     border-radius: 5px;
     color: #00ff41;
-    font-size: 2.5em;
-    text-align: center;
-    padding-top: 18%;
+    font-size: 1rem;
     box-sizing: border-box;
+}
+
+.room4CodePart strong{
+    color: #ffd700;
+    font-weight: normal;
+}
+
+.lockedCodePart{
+    color: darkgreen;
+}
+
+.lockedCodePart strong{
+    color: darkgreen;
+}
+
+.activeCodePart{
+    border-style: solid;
+    border-color: #ffd700;
+}
+
+#room4QuestLockStatus{
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid darkgreen;
+    color: #ffd700;
 }
 
 .room4Pieces{

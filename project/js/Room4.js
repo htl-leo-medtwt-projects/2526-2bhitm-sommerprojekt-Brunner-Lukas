@@ -10,7 +10,7 @@ let room4Pc = {
                 text: "Der for-Loop ist durcheinandergeraten. Ziehe die Teile in die richtige Reihenfolge.",
                 pieces: ["i < 5;", "{ console.log(i); }", "i++)", "for", "(let i = 0;"],
                 solution: ["for", "(let i = 0;", "i < 5;", "i++)", "{ console.log(i); }"],
-                code: "R4-01"
+                code: "94"
             },
             {
                 title: "CSS",
@@ -75,7 +75,7 @@ let room4Pc = {
                 type: "input",
                 text: "Was ergibt \"10\" + 5 in JavaScript?",
                 answers: ["105"],
-                code: "R4-08"
+                code: "A4H"
             },
             {
                 title: "Fibonacci",
@@ -83,7 +83,7 @@ let room4Pc = {
                 type: "input",
                 text: "Ergaenze die Zahlenreihe: 1, 1, 2, 3, 5, 8, ?",
                 answers: ["13"],
-                code: "R4-09"
+                code: "9A2"
             },
             {
                 title: "Regex",
@@ -175,8 +175,7 @@ function openRoom4Pc(pcName, questNumber = 0){
         nav += `<div class="room4QuestTab${active}${solved}" onclick="openRoom4Pc('${pcName}', ${i})">${pc.quests[i].title}</div>`;
     }
 
-    let code = solvedRoom4[pcName + questNumber] ? quest.code : "LOCKED";
-    let text = solvedRoom4[pcName + questNumber] ? "Code fragment unlocked." : "Solve this quest to unlock one part of the final code.";
+    let questLockText = solvedRoom4[pcName + questNumber] ? "Code unlocked." : "Locked until solved.";
 
     overlay.style.display = "block";
     overlay.innerHTML =
@@ -191,13 +190,32 @@ function openRoom4Pc(pcName, questNumber = 0){
             <p>${quest.text}</p>
             ${getRoom4Quest(pcName, questNumber)}
             <div id="room4Error"></div>
+            <div id="room4QuestLockStatus">${questLockText}</div>
         </div>
         <div id="room4CodeBox">
-            <h3>CODE PART</h3>
-            <p>${text}</p>
-            <div id="room4CodePart">${code}</div>
+            <h3>CODE PARTS</h3>
+            <p>All code parts on this computer.</p>
+            <div id="room4CodeParts">${getRoom4CodeParts(pcName, questNumber)}</div>
         </div>
     </div>`;
+}
+
+function getRoom4CodeParts(pcName, questNumber){
+    let pc = room4Pc[pcName];
+    let html = "";
+
+    for (let i = 0; i < pc.quests.length; i++) {
+        let active = i === questNumber ? " activeCodePart" : "";
+        let locked = solvedRoom4[pcName + i] ? "" : " lockedCodePart";
+        let code = solvedRoom4[pcName + i] ? pc.quests[i].code : "LOCKED";
+
+        html += `<div class="room4CodePart${active}${locked}">
+            <span>${pc.quests[i].title}</span>
+            <strong>${code}</strong>
+        </div>`;
+    }
+
+    return html;
 }
 
 function getRoom4Quest(pcName, questNumber){

@@ -8,6 +8,62 @@ function openHowTo(){
     </div>`;
 }
 
+const room1Tips = [
+    'Der Username: Gib deinen Namen ein, um die Session zu starten.',
+    'Das Passwort: Du kennst es nicht? Keine Panik. Ein falscher Versuch könnte eine Schwachstelle im System offenlegen.',
+    'Die Konsole: Achte auf visuelle Veränderungen. Wenn das System einen Fehler meldet, erscheint vielleicht ein direkter Zugang zu den Entwickler-Logs. Ein Klick darauf verrät dir mehr, als die Admins von Momento eigentlich zulassen wollten.'
+];
+
+let currentRoom1Tip = 0;
+
+function firstRoomInfoButton(){
+    return `<button id="room1InfoButton" onclick="openRoom1Info()" aria-label="Info zu Raum 1">I</button>`;
+}
+
+function openRoom1Info(){
+    closeRoom1Info();
+    currentRoom1Tip = 0;
+
+    // Mit hilfe von Ki gemacht worden aber nur für bug fixes
+    document.body.insertAdjacentHTML('beforeend', `
+        <div id="room1InfoOverlay">
+            <div id="room1InfoPanel">
+                <button id="room1InfoClose" onclick="closeRoom1Info()" aria-label="Info schließen">X</button>
+                <p class="room1InfoKicker">Raum 1</p>
+                <h2>Die Pforten von Momento</h2>
+                <p>Du stehst vor der ersten Hürde. Das System hat dich erkannt, aber es vertraut dir noch nicht. Um tiefer in die Schaltkreise vorzudringen, musst du dir eine digitale Identität innerhalb des Momento-Netzwerks sichern.</p>
+
+                <h3>Deine Mission</h3>
+                <p><strong>Identifikation:</strong> Hinterlege deinen Usernamen im System. Das System wird dich ab jetzt unter diesem Namen führen (gespeichert in deinem localStorage).</p>
+                <p><strong>Authentifizierung:</strong> Finde das Passwort für den Zugang.</p>
+
+                <h3>Hinweis vom System</h3>
+                <p class="systemHint">"Sicherheit ist eine Illusion. Wenn die Vorderseite verschlossen ist, schau dir die Rückseite des Codes an. Manchmal hinterlässt das System Spuren dort, wo normale User niemals hinsehen."</p>
+
+                <div id="room1TipBox">
+                    <button id="room1TipButton" onclick="showRoom1Tip()">Tipp anzeigen</button>
+                    <p id="room1TipText">Klicke auf den Tipp-Button, wenn du einen Hinweis brauchst.</p>
+                </div>
+            </div>
+        </div>
+    `);
+}
+
+function closeRoom1Info(){
+    let overlay = document.getElementById('room1InfoOverlay');
+    if (overlay) overlay.remove();
+}
+
+function showRoom1Tip(){
+    let tipText = document.getElementById('room1TipText');
+    let tipButton = document.getElementById('room1TipButton');
+    if (!tipText || !tipButton) return;
+
+    tipText.textContent = room1Tips[currentRoom1Tip];
+    currentRoom1Tip = (currentRoom1Tip + 1) % room1Tips.length;
+    tipButton.textContent = currentRoom1Tip === 0 ? 'Tipps neu starten' : 'Nächster Tipp';
+}
+
 
 
 function StartGame(){
@@ -52,6 +108,7 @@ function getError(){
         <div id="error">Invalid password</div>
         <input type="text" id="passwordInput" placeholder="Password">
         <div id="loginButton" onclick="getError()"></div>
+        ${firstRoomInfoButton()}
     </div>`;
     addTimer();
 }
@@ -69,6 +126,7 @@ function openConsole(){
         <div id="error">Invalid password</div>
         <input type="text" id="passwordInput" placeholder="Password">
         <div id="loginButton" onclick="checkPassword()"></div>
+        ${firstRoomInfoButton()}
     </div>`;
     addTimer();
 
@@ -133,6 +191,7 @@ function StartFirstLevel(){
         <input type="text" id="userNameInput" placeholder="Username">
         <input type="text" id="passwordInput" placeholder="Password">
         <div id="loginButton" onclick="saveUsername(); getError();"></div>
+        ${firstRoomInfoButton()}
     </div>`;
     addTimer();
     startTimer();
@@ -235,7 +294,7 @@ function resetTimer() {
     timerSeconds = 1800;
     localStorage.removeItem('timerSeconds');
 }
-f
+
 function addTimer() {
     if (document.getElementById('timer')) return;
     
