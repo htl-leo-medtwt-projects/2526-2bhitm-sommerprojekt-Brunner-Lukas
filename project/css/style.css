@@ -70,42 +70,83 @@ body{
 }
 
 #HowToBox{
-    background-image: url(../img/HowTo/HowToBox.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 50%;
-    width: 50%;
-    transform: rotate(90deg);
+    height: 66%;
+    width: 26%;
     position: absolute;
-    top: 10%;
-    left: -5%;
+    top: 15%;
+    left: 5%;
 }
 
 #HowToBox1{
-    background-image: url(../img/HowTo/HowToBox.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 50%;
-    width: 50%;
-    transform: rotate(90deg);
+    height: 66%;
+    width: 26%;
     position: absolute;
-    top: 10%;
-    left: 25%;
+    top: 15%;
+    left: 37%;
 }
 
 #HowToBox2{
+    height: 66%;
+    width: 26%;
+    position: absolute;
+    top: 15%;
+    left: 69%;
+}
+
+#howToTitle{
+    position: absolute;
+    top: 7%;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    font-size: 3rem;
+    text-align: center;
+    text-shadow: 0 0 18px rgba(0, 255, 65, 0.85);
+}
+
+.howToCard{
+    box-sizing: border-box;
+}
+
+.howToCard::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 66vh;
+    height: 26vw;
     background-image: url(../img/HowTo/HowToBox.png);
-    background-size: contain;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
-    height: 50%;
-    width: 50%;
-    transform: rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.howToContent{
     position: absolute;
-    top: 10%;
-    left: 55%;
+    top: 25%;
+    left: 24%;
+    width: 52%;
+    height: 45%;
+    box-sizing: border-box;
+    color: #e8fff0;
+    font-family: Share Tech Mono, monospace;
+    font-size: clamp(0.58rem, 0.78vw, 0.82rem);
+    line-height: 1.22;
+    overflow-y: auto;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.35);
+}
+
+.howToContent h2{
+    margin: 0 0 0.45rem;
+    color: #00ff41;
+    font-size: clamp(0.85rem, 1.05vw, 1.05rem);
+}
+
+.howToContent p{
+    margin: 0 0 0.45rem;
 }
 
 #Back-Button{
@@ -113,11 +154,11 @@ body{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    height: 40%;
-    width: 40%;
+    height: 24%;
+    width: 32%;
     position: absolute;
-    top: 70%;
-    left: 30%;
+    top: 74%;
+    left: 34%;
 }
 
 #tag{

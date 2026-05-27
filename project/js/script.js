@@ -1,9 +1,31 @@
 function openHowTo(){
     document.body.innerHTML =
     `<div id="background">
-        <div id="HowToBox"></div>
-        <div id="HowToBox1"></div>
-        <div id="HowToBox2"></div>
+        <h1 id="howToTitle">So spielst du</h1>
+        <div id="HowToBox" class="howToCard">
+            <div class="howToContent">
+                <h2>Ziel</h2>
+                <p>Entkomme aus dem Momento-System, bevor der Timer abläuft.</p>
+                <p>Je mehr Zeit übrig bleibt, desto besser ist dein Platz im Leaderboard.</p>
+            </div>
+        </div>
+        <div id="HowToBox1" class="howToCard">
+            <div class="howToContent">
+                <h2>Steuerung</h2>
+                <p>Klicke auf Profile, Konsolen, Notizen und auffällige Elemente.</p>
+                <p>Gefundene Passwörter und Codes gibst du in die passenden Felder ein.</p>
+                <p>Der Info-Button gibt dir Tipps, wenn du festhängst.</p>
+            </div>
+        </div>
+        <div id="HowToBox2" class="howToCard">
+            <div class="howToContent">
+                <h2>Räume</h2>
+                <p>1: Login knacken.</p>
+                <p>2: Bilder nach Codes durchsuchen.</p>
+                <p>3: Binärzahlen und Server-Code lösen.</p>
+                <p>4: PC-Aufgaben schaffen und Code-Teile freischalten.</p>
+            </div>
+        </div>
         <div id="Back-Button" onclick="backToStart()"></div>
     </div>`;
 }
@@ -71,6 +93,7 @@ function StartGame(){
     `<div id="backgroundStart">
         <div id="typedOutput"></div>
     </div>`;
+
 
     setTimeout(() => {
         const typed = new Typed('#typedOutput', {
@@ -193,6 +216,7 @@ function StartFirstLevel(){
         <div id="loginButton" onclick="saveUsername(); getError();"></div>
         ${firstRoomInfoButton()}
     </div>`;
+    resetTimer();
     addTimer();
     startTimer();
 }
