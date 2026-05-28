@@ -13,6 +13,7 @@ function StartSecondLevel(){
             </div>
             ${firstRoomInfoButton()}
     </div>`;
+    addTimer();
 }
 
 function ShowProfile(){
@@ -30,6 +31,7 @@ function ShowProfile(){
             </div>
             ${firstRoomInfoButton()}
     </div>`;
+    addTimer();
 }
 
 function checkCode(){
@@ -78,6 +80,7 @@ function openRoom2Info(){
             </div>
         </div>
     `);
+    addTimer();
 }
 
 function closeRoom2Info(){

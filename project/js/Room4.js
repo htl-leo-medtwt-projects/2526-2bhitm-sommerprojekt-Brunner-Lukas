@@ -198,6 +198,7 @@ function openRoom4Pc(pcName, questNumber = 0){
             <div id="room4CodeParts">${getRoom4CodeParts(pcName, questNumber)}</div>
         </div>
     </div>`;
+    addTimer();
 }
 
 function getRoom4CodeParts(pcName, questNumber){
@@ -283,7 +284,7 @@ function getRoom4Quest(pcName, questNumber){
         <input type="number" id="room4Answer" placeholder="z-index" oninput="changeZIndex()" onkeydown="room4Enter(event, '${pcName}', ${questNumber})">
         <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
     }
-
+    addTimer();
     return html;
 }
 

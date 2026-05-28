@@ -63,6 +63,7 @@ function StartThirdLevel(){
             </div>
         </div>
     </div>`;
+    addTimer();
 }
 
 function showAsciiTable(){
@@ -89,6 +90,7 @@ function showFirstRiddleTip(){
             </div>
         </div>
     </div>`;
+    addTimer();
 }
 
 function showSecondRiddleTip(){
@@ -105,6 +107,7 @@ function showSecondRiddleTip(){
             </div>
         </div>
     </div>`;
+    addTimer();
 }
 
 function checkThirdLevel(){
