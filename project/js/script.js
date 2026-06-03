@@ -180,6 +180,58 @@ function finishGame(){
     completeTimer();
 }
 
+function showLoadingScreen(nextLevel){
+    document.body.innerHTML =
+    `<div id="backgroundStart" class="loadingScreen">
+        <div id="typedOutput" class="loadingScreenText"></div>
+    </div>`;
+    addTimer();
+    updateTimer();
+
+    setTimeout(() => {
+        const output = document.getElementById('typedOutput');
+        if (!output) return;
+
+        if (typeof Typed === 'undefined') {
+            output.textContent = 'Loading...';
+            return;
+        }
+
+        new Typed('#typedOutput', {
+            strings: [
+                'Loading...',
+                'Loading..',
+                'Loading.',
+                'Loading...',
+                'Loading..',
+                'Loading.',
+                'Almost there...'
+            ],
+            typeSpeed: 50,
+            backSpeed: 25,
+            backDelay: 500,
+            startDelay: 100,
+            loop: false,
+            showCursor: false
+        });
+    }, 100);
+
+    setTimeout(nextLevel, 6000);
+}
+
+function LoadingScreenSecondRoom(){
+    showLoadingScreen(StartSecondLevel);
+}
+
+function LoadingScreenThirdRoom(){
+    showLoadingScreen(StartThirdLevel);
+}
+
+function LoadingScreenFourthRoom(){
+    showLoadingScreen(StartFourthLevel);
+}
+
+
 function openLeaderBoard(){
     stopTimer();
     document.body.innerHTML =
@@ -230,7 +282,7 @@ function checkPassword(){
     let password = document.getElementById("passwordInput").value;
     
     if (password === "password123"){
-        StartSecondLevel();
+        LoadingScreenSecondRoom();
         //finishGame();
     }
 }

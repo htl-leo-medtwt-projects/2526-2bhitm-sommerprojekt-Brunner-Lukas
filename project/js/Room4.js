@@ -161,6 +161,7 @@ function StartFourthLevel(){
         <div id="pcRight" onclick="openRoom4Pc('right')">PC 03</div>
         <div id="room4ComputerOverlay"></div>
     </div>`;
+    addTimer();
 }
 
 function openRoom4Pc(pcName, questNumber = 0){

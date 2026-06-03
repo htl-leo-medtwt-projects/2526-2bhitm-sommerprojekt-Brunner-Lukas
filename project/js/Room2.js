@@ -38,7 +38,7 @@ function checkCode(){
     code = document.getElementById("codeInputField").value;
     console.log(code);
     if (code === "7k3kx2"){
-        StartThirdLevel();
+        LoadingScreenThirdRoom();
     }
 }
 

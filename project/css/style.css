@@ -213,6 +213,17 @@ position: absolute;
     padding-right: 10%;
 }
 
+.loadingScreen #typedOutput{
+    top: 40%;
+    left: 50%;
+    width: 80%;
+    padding-right: 0;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #00ff41;
+    text-shadow: 0 0 18px rgba(0, 255, 65, 0.8);
+}
+
 #backgroundFirstRoom{
     background-image: url(../img/Räume/room1/BackgroundRoom1.png);
     background-size: 100% 100%;

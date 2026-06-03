@@ -116,7 +116,7 @@ function checkThirdLevel(){
     const error = document.getElementById('thirdLevelError');
 
     if (binary === 'N3T' && server === '5987') {
-        StartFourthLevel();
+        LoadingScreenFourthRoom();
     } else {
         error.textContent = 'ACCESS DENIED – check your answers.';
         setTimeout(() => { error.textContent = ''; }, 2500);
