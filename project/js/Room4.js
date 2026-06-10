@@ -103,17 +103,17 @@ let room4Pc = {
             {
                 title: "Inspektor",
                 headline: "Der Inspektor",
-                type: "input",
-                text: "Die Loesung steht im Schatten. Oeffne die Entwicklertools und suche im HTML-Kommentar.",
-                comment: "SCHATTEN-42",
+                type: "inspect",
+                text: "Die Loesung steht im Schatten. Nutze den eingebauten Inspektor und suche im HTML-Ausschnitt.",
                 answers: ["schatten-42"],
                 code: "R4-11"
             },
             {
                 title: "Konsole",
                 headline: "Die verborgene Konsole",
-                type: "input",
-                text: "Rede mit der Seite. Tippe hello() in die JavaScript-Konsole und gib das Passwort hier ein.",
+                type: "terminal",
+                text: "Rede mit dem eingebauten Terminal. Fuehre hello() aus und gib das Passwort hier ein.",
+                command: "hello()",
                 answers: ["konsole-73"],
                 code: "R4-12"
             },
@@ -136,9 +136,9 @@ let room4Pc = {
             {
                 title: "Roboter",
                 headline: "Der Pfad des Roboters",
-                type: "order",
-                text: "Ziehe die Befehle in die richtige Reihenfolge, damit der Roboter das Ziel erreicht.",
-                pieces: ["turnRight()", "move()", "move()"],
+                type: "robot",
+                text: "Waehle die Befehle in der richtigen Reihenfolge, damit der Roboter das Ziel erreicht.",
+                pieces: ["move()", "turnRight()", "turnLeft()"],
                 solution: ["move()", "turnRight()", "move()"],
                 code: "R4-15"
             }
@@ -148,12 +148,14 @@ let room4Pc = {
 
 let solvedRoom4 = {};
 let draggedPiece = "";
+let room4RobotCommands = [];
 
 function hello(){
     alert("Passwort: KONSOLE-73");
 }
 
 function StartFourthLevel(){
+    stopRoom3BackgroundSound();
     document.body.innerHTML =
     `<div id="backgroundFourthRoom">
         <div id="pcLeft" onclick="openRoom4Pc('left')">PC 01</div>
@@ -256,9 +258,6 @@ function getRoom4Quest(pcName, questNumber){
     }
 
     if (quest.type === "input" || quest.type === "color") {
-        if (quest.comment) {
-            html += `<!-- ${quest.comment} -->`;
-        }
         if (quest.type === "color") {
             html += `<div id="colorPreview">#00FF00</div>`;
         }
@@ -284,6 +283,41 @@ function getRoom4Quest(pcName, questNumber){
         </div>
         <input type="number" id="room4Answer" placeholder="z-index" oninput="changeZIndex()" onkeydown="room4Enter(event, '${pcName}', ${questNumber})">
         <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+    }
+
+    if (quest.type === "inspect") {
+        html += `<div id="room4Inspector">
+            <div id="room4InspectorBar">
+                <span>Elements</span>
+                <span>Styles</span>
+                <span>Console</span>
+            </div>
+            <pre>&lt;section id="shadow-door"&gt;
+  &lt;h1&gt;Momento Gate&lt;/h1&gt;
+  &lt;div class="visible"&gt;ACCESS LOCKED&lt;/div&gt;
+  &lt;!-- SCHATTEN-42 --&gt;
+&lt;/section&gt;</pre>
+        </div>
+        <input type="text" id="room4Answer" placeholder="Code aus dem Inspektor" onkeydown="room4Enter(event, '${pcName}', ${questNumber})">
+        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+    }
+
+    if (quest.type === "terminal") {
+        html += `<div id="room4MiniConsole">
+            <div id="room4MiniConsoleOutput">Momento Terminal bereit.</div>
+            <div id="room4ConsoleLine">
+                <span>&gt;</span>
+                <input type="text" id="room4CommandInput" placeholder="Befehl eingeben">
+                <button id="room4RunCommand" onclick="runRoom4Command('${pcName}', ${questNumber})">RUN</button>
+            </div>
+        </div>
+        <input type="text" id="room4Answer" placeholder="Passwort" onkeydown="room4Enter(event, '${pcName}', ${questNumber})">
+        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+    }
+
+    if (quest.type === "robot") {
+        room4RobotCommands = [];
+        html += getRoom4RobotHtml(pcName, questNumber);
     }
     addTimer();
     return html;
@@ -335,6 +369,108 @@ function checkRoom4Choice(pcName, questNumber, answer){
     checkRoom4(pcName, questNumber, decodeURIComponent(answer));
 }
 
+function runRoom4Command(pcName, questNumber){
+    let quest = room4Pc[pcName].quests[questNumber];
+    let input = document.getElementById("room4CommandInput");
+    let output = document.getElementById("room4MiniConsoleOutput");
+
+    if (!input || !output) return;
+
+    if (input.value.trim().toLowerCase() === quest.command.toLowerCase()) {
+        output.innerHTML = `&gt; ${getRoom4Text(input.value)}<br>Passwort: KONSOLE-73`;
+    } else {
+        output.innerHTML = `&gt; ${getRoom4Text(input.value)}<br>Unknown command.`;
+    }
+}
+
+function getRoom4RobotHtml(pcName, questNumber){
+    let commandButtons = "";
+    let quest = room4Pc[pcName].quests[questNumber];
+
+    for (let i = 0; i < quest.pieces.length; i++) {
+        commandButtons += `<button class="room4RobotButton" onclick="addRoom4RobotCommand('${pcName}', ${questNumber}, '${quest.pieces[i]}')">${quest.pieces[i]}</button>`;
+    }
+
+    return `<div id="room4RobotArea">
+        <div id="room4RobotGrid">${getRoom4RobotGrid()}</div>
+        <div id="room4RobotPanel">
+            <div id="room4RobotCommands">${commandButtons}</div>
+            <div id="room4RobotSequence">Sequence: -</div>
+            <button class="room4RobotReset" onclick="resetRoom4Robot('${pcName}', ${questNumber})">RESET</button>
+            <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>
+        </div>
+    </div>`;
+}
+
+function getRoom4RobotGrid(commands = room4RobotCommands){
+    let robot = { row: 1, col: 1, dir: "right" };
+    let goal = { row: 2, col: 2 };
+    let directionSymbols = {
+        right: "&gt;",
+        down: "v",
+        left: "&lt;",
+        up: "^"
+    };
+    let dirs = ["right", "down", "left", "up"];
+
+    for (let i = 0; i < commands.length; i++) {
+        if (commands[i] === "turnRight()") {
+            robot.dir = dirs[(dirs.indexOf(robot.dir) + 1) % dirs.length];
+        }
+        if (commands[i] === "turnLeft()") {
+            robot.dir = dirs[(dirs.indexOf(robot.dir) + 3) % dirs.length];
+        }
+        if (commands[i] === "move()") {
+            if (robot.dir === "right") robot.col++;
+            if (robot.dir === "down") robot.row++;
+            if (robot.dir === "left") robot.col--;
+            if (robot.dir === "up") robot.row--;
+        }
+    }
+
+    let html = "";
+    for (let row = 0; row < 4; row++) {
+        for (let col = 0; col < 4; col++) {
+            let classes = "room4RobotCell";
+            let content = "";
+
+            if (row === goal.row && col === goal.col) {
+                classes += " robotGoal";
+                content = "GOAL";
+            }
+
+            if (row === robot.row && col === robot.col) {
+                classes += " robotHere";
+                content = directionSymbols[robot.dir];
+            }
+
+            html += `<div class="${classes}">${content}</div>`;
+        }
+    }
+
+    return html;
+}
+
+function addRoom4RobotCommand(pcName, questNumber, command){
+    if (room4RobotCommands.length >= room4Pc[pcName].quests[questNumber].solution.length) return;
+
+    room4RobotCommands.push(command);
+    updateRoom4RobotView();
+}
+
+function resetRoom4Robot(){
+    room4RobotCommands = [];
+    updateRoom4RobotView();
+}
+
+function updateRoom4RobotView(){
+    let grid = document.getElementById("room4RobotGrid");
+    let sequence = document.getElementById("room4RobotSequence");
+
+    if (grid) grid.innerHTML = getRoom4RobotGrid();
+    if (sequence) sequence.textContent = `Sequence: ${room4RobotCommands.length ? room4RobotCommands.join(" -> ") : "-"}`;
+}
+
 function checkRoom4(pcName, questNumber, choiceAnswer = ""){
     let quest = room4Pc[pcName].quests[questNumber];
     let correct = false;
@@ -360,7 +496,7 @@ function checkRoom4(pcName, questNumber, choiceAnswer = ""){
         correct = choiceAnswer.trim().toLowerCase() === quest.answer.trim().toLowerCase();
     }
 
-    if (quest.type === "input" || quest.type === "color") {
+    if (quest.type === "input" || quest.type === "color" || quest.type === "inspect" || quest.type === "terminal") {
         let answer = document.getElementById("room4Answer").value.trim().toLowerCase();
         for (let i = 0; i < quest.answers.length; i++) {
             if (answer === quest.answers[i].toLowerCase()) correct = true;
@@ -377,6 +513,13 @@ function checkRoom4(pcName, questNumber, choiceAnswer = ""){
     if (quest.type === "zindex") {
         let z = document.getElementById("room4Answer").value;
         correct = Number(z) >= quest.answer;
+    }
+
+    if (quest.type === "robot") {
+        correct = room4RobotCommands.length === quest.solution.length;
+        for (let i = 0; i < quest.solution.length; i++) {
+            if (room4RobotCommands[i] !== quest.solution[i]) correct = false;
+        }
     }
 
     if (correct) {

@@ -1,4 +1,5 @@
 function StartSecondLevel(){
+    stopRoom3BackgroundSound();
     document.body.innerHTML = 
     `<div id="backgroundSecondRoom">
         <div id="LogoSecondRoom"></div>
@@ -11,7 +12,7 @@ function StartSecondLevel(){
                 <div id="picture5"></div>
                 <div id="picture6"></div>
             </div>
-            ${firstRoomInfoButton()}
+            ${secondRoomInfoButton()}
     </div>`;
     addTimer();
 }
@@ -19,7 +20,7 @@ function StartSecondLevel(){
 function ShowProfile(){
     document.body.innerHTML = 
     `<div id="backgroundSecondRoom">
-        <div id="BackButton" onclick="StartSecondLevel()">Back</div>
+        <button id="BackButton" onclick="StartSecondLevel()" aria-label="Zurück">X</button>
         <div id="LogoSecondRoom"></div>
         <div id="ProfileOpen">
             <div id="profilePicture"></div>
@@ -27,9 +28,9 @@ function ShowProfile(){
         </div>
             <div id="CodeInput">
                 <input type="text" id="codeInputField" placeholder="Enter code">
-                <div id="submitCodeButton" onclick="checkCode()">Submit</div>
             </div>
-            ${firstRoomInfoButton()}
+            <button id="submitCodeButton" onclick="checkCode()">Submit</button>
+            ${secondRoomInfoButton()}
     </div>`;
     addTimer();
 }

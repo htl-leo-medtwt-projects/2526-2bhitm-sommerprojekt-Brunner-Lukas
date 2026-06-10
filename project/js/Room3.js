@@ -1,4 +1,5 @@
 function StartThirdLevel(){
+    startRoom3BackgroundSound();
     document.body.innerHTML = `
     <div id="backgroundThirdRoom">
         <div id="firstStickyNote" onclick="showFirstRiddleTip()"></div>
@@ -116,6 +117,7 @@ function checkThirdLevel(){
     const error = document.getElementById('thirdLevelError');
 
     if (binary === 'N3T' && server === '5987') {
+        stopRoom3BackgroundSound();
         LoadingScreenFourthRoom();
     } else {
         error.textContent = 'ACCESS DENIED – check your answers.';

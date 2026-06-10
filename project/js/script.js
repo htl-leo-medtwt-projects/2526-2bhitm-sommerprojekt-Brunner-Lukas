@@ -1,4 +1,60 @@
+const buttonClickSoundPath = './Sound/ButtonClick.mp3';
+let room3BackgroundAudio = null;
+let introKeyboardAudio = null;
+
+document.addEventListener('click', (event) => {
+    if (event.target.closest('button, [onclick], .room4Check, .room4Choice, .room4QuestTab')) {
+        playButtonClickSound();
+    }
+
+    if (document.getElementById('backgroundThirdRoom') && room3BackgroundAudio && room3BackgroundAudio.paused) {
+        startRoom3BackgroundSound();
+    }
+}, true);
+
+function playButtonClickSound(){
+    const sound = new Audio(buttonClickSoundPath);
+    sound.volume = 0.45;
+    sound.play().catch(() => {});
+}
+
+function startRoom3BackgroundSound(){
+    if (!room3BackgroundAudio) {
+        room3BackgroundAudio = new Audio('./Sound/Room3BackgroundSound.mp3');
+        room3BackgroundAudio.loop = true;
+    }
+
+    room3BackgroundAudio.volume = 0.85;
+    room3BackgroundAudio.play().catch(() => {});
+}
+
+function stopRoom3BackgroundSound(){
+    if (!room3BackgroundAudio) return;
+
+    room3BackgroundAudio.pause();
+    room3BackgroundAudio.currentTime = 0;
+}
+
+function startIntroKeyboardSound(){
+    if (!introKeyboardAudio) {
+        introKeyboardAudio = new Audio('./Sound/KeyboardClicking.mp3');
+        introKeyboardAudio.loop = true;
+        introKeyboardAudio.volume = 0.45;
+    }
+
+    introKeyboardAudio.currentTime = 0;
+    introKeyboardAudio.play().catch(() => {});
+}
+
+function stopIntroKeyboardSound(){
+    if (!introKeyboardAudio) return;
+
+    introKeyboardAudio.pause();
+    introKeyboardAudio.currentTime = 0;
+}
+
 function openHowTo(){
+    stopRoom3BackgroundSound();
     document.body.innerHTML =
     `<div id="background">
         <h1 id="howToTitle">So spielst du</h1>
@@ -89,6 +145,8 @@ function showRoom1Tip(){
 
 
 function StartGame(){
+    stopRoom3BackgroundSound();
+    stopIntroKeyboardSound();
     document.body.innerHTML = 
     `<div id="backgroundStart">
         <div id="typedOutput"></div>
@@ -96,6 +154,7 @@ function StartGame(){
 
 
     setTimeout(() => {
+        startIntroKeyboardSound();
         const typed = new Typed('#typedOutput', {
             strings: ['Willkommen zu Web Escape!',
                       'Du hast versucht dich in das System einzuloggen, aber es ist etwas schief gelaufen.',
@@ -110,10 +169,12 @@ function StartGame(){
             backDelay: 2000,
             startDelay: 1000,
             loop: false,
-            showCursor: false
+            showCursor: false,
+            onComplete: stopIntroKeyboardSound
         });
 }, 100);
 setTimeout(() => {
+    stopIntroKeyboardSound();
     StartFirstLevel();
 }, 50000);
 }
@@ -121,6 +182,7 @@ setTimeout(() => {
 
 
 function getError(){
+    stopRoom3BackgroundSound();
     document.body.innerHTML = 
     `<div id="backgroundFirstRoom">
         <div id="firstLevel"></div>
@@ -220,6 +282,7 @@ function showLoadingScreen(nextLevel){
 }
 
 function LoadingScreenSecondRoom(){
+    stopRoom3BackgroundSound();
     showLoadingScreen(StartSecondLevel);
 }
 
@@ -228,11 +291,13 @@ function LoadingScreenThirdRoom(){
 }
 
 function LoadingScreenFourthRoom(){
+    stopRoom3BackgroundSound();
     showLoadingScreen(StartFourthLevel);
 }
 
 
 function openLeaderBoard(){
+    stopRoom3BackgroundSound();
     stopTimer();
     document.body.innerHTML =
     `<div id="background">
@@ -247,6 +312,7 @@ function openLeaderBoard(){
 }
 
 function backToStart(){
+    stopRoom3BackgroundSound();
     stopTimer();
     document.body.innerHTML =
     `<div id="background">
@@ -258,6 +324,8 @@ function backToStart(){
 }
 
 function StartFirstLevel(){
+    stopRoom3BackgroundSound();
+    stopIntroKeyboardSound();
     document.body.innerHTML = 
     `<div id="backgroundFirstRoom">
         <div id="firstLevel"></div>

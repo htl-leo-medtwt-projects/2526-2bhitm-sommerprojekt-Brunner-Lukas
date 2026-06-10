@@ -211,6 +211,7 @@ position: absolute;
     color: white;
     font-family: Share Tech Mono, monospace;
     padding-right: 10%;
+    background-color: transparent;
 }
 
 .loadingScreen #typedOutput{
@@ -472,9 +473,10 @@ position: absolute;
     outline: none;
     padding: 0.5rem;
     overflow-y: auto;
-    #consoleInput {
-    white-space: pre;
-}
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+    box-sizing: border-box;
 }
 
 #backgroundSecondRoom{
@@ -1505,4 +1507,266 @@ position: absolute;
     z-index: 3;
     background-color: black;
     border: 1px solid darkgreen;
+}
+
+#console{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    height: 42px;
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.78);
+    color: #00ff41;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+    box-shadow: 0 0 18px rgba(0, 255, 65, 0.28), inset 0 0 18px rgba(0, 255, 65, 0.08);
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+#console:hover{
+    background: rgba(0, 255, 65, 0.15);
+    box-shadow: 0 0 28px rgba(0, 255, 65, 0.55), inset 0 0 20px rgba(0, 255, 65, 0.12);
+    transform: translateY(-1px);
+}
+
+#consoleInput{
+    width: 74%;
+    color: #00ff41;
+    font-size: clamp(0.48rem, 0.72vw, 0.72rem);
+    line-height: 1.4;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+#submitCodeButton{
+    height: 3.25rem;
+    min-width: 9rem;
+    margin-left: 0.8rem;
+    padding: 0 1.4rem;
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.86);
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.75);
+    box-shadow: 0 0 18px rgba(0, 255, 65, 0.28);
+    cursor: pointer;
+    vertical-align: top;
+}
+
+#submitCodeButton:hover{
+    background: #00ff41;
+    color: black;
+    text-shadow: none;
+}
+
+#room4Inspector{
+    margin-top: 1.2rem;
+    border: 1px solid #00ff41;
+    border-radius: 5px;
+    background: #06110a;
+    box-shadow: inset 0 0 18px rgba(0, 255, 65, 0.1);
+}
+
+#room4InspectorBar{
+    display: flex;
+    gap: 1rem;
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid darkgreen;
+    background: rgba(0, 255, 65, 0.08);
+    color: #ffd700;
+}
+
+#room4Inspector pre{
+    margin: 0;
+    padding: 1rem;
+    color: #dfffe8;
+    font-family: Share Tech Mono, monospace;
+    line-height: 1.55;
+    white-space: pre-wrap;
+}
+
+#room4MiniConsole{
+    margin-top: 1.2rem;
+    padding: 1rem;
+    border: 1px solid #00ff41;
+    border-radius: 5px;
+    background: #020805;
+}
+
+#room4MiniConsoleOutput{
+    min-height: 4rem;
+    margin-bottom: 0.9rem;
+    color: #dfffe8;
+    line-height: 1.5;
+}
+
+#room4ConsoleLine{
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+#room4CommandInput{
+    flex: 1;
+    height: 2.2rem;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    background: black;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    padding: 0 0.7rem;
+    outline: none;
+}
+
+#room4RunCommand,
+.room4RobotButton,
+.room4RobotReset{
+    height: 2.35rem;
+    padding: 0 1rem;
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+    background: black;
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    cursor: pointer;
+}
+
+#room4RunCommand:hover,
+.room4RobotButton:hover,
+.room4RobotReset:hover,
+.room4Check:hover,
+.room4Choice:hover,
+.room4QuestTab:hover{
+    background: #00ff41;
+    color: black;
+}
+
+#room4RobotArea{
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    margin-top: 1.2rem;
+}
+
+#room4RobotGrid{
+    display: grid;
+    grid-template-columns: repeat(4, 52px);
+    grid-template-rows: repeat(4, 52px);
+    gap: 6px;
+    padding: 10px;
+    border: 1px solid #00ff41;
+    border-radius: 5px;
+    background: rgba(0, 255, 65, 0.06);
+}
+
+.room4RobotCell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid darkgreen;
+    border-radius: 4px;
+    background: black;
+    color: darkgreen;
+    font-size: 0.72rem;
+    box-sizing: border-box;
+}
+
+.robotGoal{
+    border-color: #ffd700;
+    color: #ffd700;
+    box-shadow: inset 0 0 12px rgba(255, 215, 0, 0.18);
+}
+
+.robotHere{
+    border-color: #00ff41;
+    background: #00ff41;
+    color: black;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+#room4RobotPanel{
+    min-width: 0;
+}
+
+#room4RobotCommands{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+#room4RobotSequence{
+    min-height: 2.4rem;
+    padding: 0.7rem;
+    border: 1px dashed darkgreen;
+    border-radius: 4px;
+    color: #dfffe8;
+    overflow-wrap: anywhere;
+}
+
+.room4RobotReset{
+    margin-top: 1rem;
+    margin-right: 0.6rem;
+    border-color: #ffd700;
+    color: #ffd700;
+}
+
+#BackButton{
+    position: absolute;
+    top: 4%;
+    right: 5%;
+    left: auto;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1px solid #00ff41;
+    border-radius: 4px;
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0.86);
+    color: #00ff41;
+    font-family: Share Tech Mono, monospace;
+    font-size: 1.4rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.75);
+    box-shadow: 0 0 18px rgba(0, 255, 65, 0.28);
+    cursor: pointer;
+}
+
+#BackButton:hover{
+    background-color: #00ff41;
+    color: black;
+    text-shadow: none;
+}
+
+#submitCodeButton{
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    width: auto;
+    min-width: 10rem;
+    height: 3.25rem;
+    margin-left: 0;
+    padding: 0 1.6rem;
+    font-size: 1.1rem;
+    transform: translateX(-50%);
+}
+
+#CodeInput{
+    left: 50%;
+    width: min(34rem, 88vw);
+    transform: translateX(-50%);
+}
+
+#codeInputField{
+    width: 100%;
+    box-sizing: border-box;
 }
