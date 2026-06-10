@@ -44,9 +44,9 @@ function checkCode(){
 }
 
 const room2Tips = [
-    'Genau hinsehen: Die Zeichen könnten sich in den Mustern eines Kleidungsstücks, in den Schatten an einer Wand oder im Hintergrund eines Urlaubsfotos verstecken.',
-    'Die Reihenfolge: Wenn du mehrere Zeichen findest, probiere aus, ob die Reihenfolge der Posts (z.B. von oben nach unten oder chronologisch) den korrekten Code ergibt.',
-    'Das Profil-Menü: Erst wenn du dir mit dem Code sicher bist, klicke auf das Profil-Icon oder den Profil-Namen, um das geheime Eingabefeld zu öffnen.'
+    'Nutze den Zoom deines Browsers oder achte auf Kontraste. Die Zeichen sind oft in dunklen Ecken oder feinen Mustern versteckt.',
+    'Notiere dir die Zeichen am besten in der Reihenfolge, in der du die Posts im Feed findest.',
+    'Der Klick auf das Profil öffnet die versteckte Eingabemaske. Dort gehört der komplette Code hinein.'
 ];
 
 let currentRoom2Tip = 0;
@@ -64,15 +64,15 @@ function openRoom2Info(){
             <div id="room1InfoPanel">
                 <button id="room1InfoClose" onclick="closeRoom2Info()" aria-label="Info schließen">X</button>
                 <p class="room1InfoKicker">Raum 2</p>
-                <h2>Die algorithmische Fassade</h2>
-                <p>Der Login war erfolgreich, du bist im System! Doch statt tiefer Systemdateien landest du auf der Timeline des Social-Media-Netwzerks Momento. Aber lass dich nicht täuschen: Das System nutzt die Bilder, um wichtige Daten vor unbefugten Blicken zu verbergen.</p>
+                <h2>Die Datenströme von Momento</h2>
+                <p>Du hast das Tor durchbrochen, doch jetzt befindest du dich im pulsierenden Herzstück des Netzwerks: der Social-Media-Plattform Momento. Hier teilen User Bruchstücke ihrer Realität, doch hinter der glänzenden Oberfläche des Feeds verbirgt sich ein Code.</p>
 
                 <h3>Deine Mission</h3>
-                <p><strong>Die Timeline scannen:</strong> Schau dir die geposteten Bilder auf der Seite ganz genau an. In ihnen sind Buchstaben oder Zahlen versteckt.</p>
-                <p><strong>Das Schloss knacken:</strong> Klicke auf das Profil des Users, um das Eingabefeld zu öffnen, und gib den gefundenen Code ein.</p>
+                <p><strong>Die Fragmente finden:</strong> Durchsuche die geposteten Bilder nach versteckten, kryptischen Zeichen.</p>
+                <p><strong>Die Verifizierung:</strong> Rufe das Profil auf und gib die gesammelten Zeichen in der richtigen Reihenfolge ein.</p>
 
                 <h3>Hinweis vom System</h3>
-                <p class="systemHint">"Ein Bild sagt mehr als tausend Worte – und manchmal verbirgt es genau die Kombination, die du brauchst. Traue deinen Augen nicht zu schnell, die Wahrheit steckt im Detail."</p>
+                <p class="systemHint">"Ein Bild sagt mehr als tausend Worte, aber für ein geschultes Auge transportiert es Daten. Schaue genau hin, wo die Pixel Pixel sein sollten."</p>
 
                 <div id="room1TipBox">
                     <button id="room1TipButton" onclick="showRoom2Tip()">Tipp anzeigen</button>

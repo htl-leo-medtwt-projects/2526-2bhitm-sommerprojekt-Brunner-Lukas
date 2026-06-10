@@ -162,6 +162,7 @@ function StartFourthLevel(){
         <div id="pcCenter" onclick="openRoom4Pc('center')">PC 02</div>
         <div id="pcRight" onclick="openRoom4Pc('right')">PC 03</div>
         <div id="room4ComputerOverlay"></div>
+        ${fourthRoomInfoButton()}
     </div>`;
     addTimer();
 }
@@ -524,6 +525,10 @@ function checkRoom4(pcName, questNumber, choiceAnswer = ""){
 
     if (correct) {
         solvedRoom4[pcName + questNumber] = true;
+        if (isRoom4Complete()) {
+            finishGame();
+            return;
+        }
         openRoom4Pc(pcName, questNumber);
     } else {
         document.getElementById("room4Error").innerHTML = "Wrong answer. Try again.";
@@ -531,6 +536,72 @@ function checkRoom4(pcName, questNumber, choiceAnswer = ""){
             if (document.getElementById("room4Error")) document.getElementById("room4Error").innerHTML = "";
         }, 2000);
     }
+}
+
+function isRoom4Complete(){
+    for (let pcName in room4Pc) {
+        for (let i = 0; i < room4Pc[pcName].quests.length; i++) {
+            if (!solvedRoom4[pcName + i]) return false;
+        }
+    }
+
+    return true;
+}
+
+const room4Tips = [
+    'Du musst nicht alles in einer festen Reihenfolge lösen. Nutze die Tabs und arbeite zuerst an den Rätseln, die dir klar sind.',
+    'Gelöste Rätsel färben sich um und schalten im Code-Bereich ihren Teil frei.',
+    'Für Drag-and-drop-Aufgaben zählt die Reihenfolge der Slots. Beim Roboter zählt die Reihenfolge deiner gewählten Befehle.'
+];
+
+let currentRoom4Tip = 0;
+
+function fourthRoomInfoButton(){
+    return `<button id="room1InfoButton" onclick="openRoom4Info()" aria-label="Info zu Raum 4">I</button>`;
+}
+
+function openRoom4Info(){
+    closeRoom4Info();
+    currentRoom4Tip = 0;
+
+    document.body.insertAdjacentHTML('beforeend', `
+        <div id="room1InfoOverlay">
+            <div id="room1InfoPanel">
+                <button id="room1InfoClose" onclick="closeRoom4Info()" aria-label="Info schließen">X</button>
+                <p class="room1InfoKicker">Raum 4</p>
+                <h2>Der Countdown zur Freiheit</h2>
+                <p>Du hast den Kern erreicht, aber das System hat den Sicherheits-Lockdown aktiviert. Nur wer logisch sauber arbeitet, kann die finale Sperre brechen und Momento verlassen.</p>
+
+                <h3>Deine Mission</h3>
+                <p><strong>Der Rätsel-Marathon:</strong> Löse alle 15 Aufgaben auf den drei Terminals. Jede gelöste Aufgabe schaltet einen Code-Teil frei.</p>
+                <p><strong>Die Flucht:</strong> Sobald alle Rätsel gelöst sind, bricht das System zusammen und du entkommst.</p>
+
+                <h3>Hinweis vom System</h3>
+                <p class="systemHint">"Das Finale ist kein Sprint, sondern ein Marathon des Verstandes. Bleib fokussiert, verbinde deine bisherigen Erkenntnisse und entkomme."</p>
+
+                <div id="room1TipBox">
+                    <button id="room1TipButton" onclick="showRoom4Tip()">Tipp anzeigen</button>
+                    <p id="room1TipText">Klicke auf den Tipp-Button, wenn du einen Hinweis brauchst.</p>
+                </div>
+            </div>
+        </div>
+    `);
+    addTimer();
+}
+
+function closeRoom4Info(){
+    let overlay = document.getElementById('room1InfoOverlay');
+    if (overlay) overlay.remove();
+}
+
+function showRoom4Tip(){
+    let tipText = document.getElementById('room1TipText');
+    let tipButton = document.getElementById('room1TipButton');
+    if (!tipText || !tipButton) return;
+
+    tipText.textContent = room4Tips[currentRoom4Tip];
+    currentRoom4Tip = (currentRoom4Tip + 1) % room4Tips.length;
+    tipButton.textContent = currentRoom4Tip === 0 ? 'Tipps neu starten' : 'Nächster Tipp';
 }
 
 function changeZIndex(){

@@ -1,8 +1,18 @@
 const buttonClickSoundPath = './Sound/ButtonClick.mp3';
+const uiSoundVolume = 1;
+const backgroundMusicVolume = 0.16;
+const introBackgroundMusicVolume = 0.07;
+const maxTimerSeconds = 1800;
+let backgroundMusicAudio = null;
 let room3BackgroundAudio = null;
 let introKeyboardAudio = null;
+let introKeyboardMonitor = null;
+let introKeyboardLastText = "";
+let introKeyboardLastChange = 0;
 
 document.addEventListener('click', (event) => {
+    startBackgroundMusic();
+
     if (event.target.closest('button, [onclick], .room4Check, .room4Choice, .room4QuestTab')) {
         playButtonClickSound();
     }
@@ -14,8 +24,23 @@ document.addEventListener('click', (event) => {
 
 function playButtonClickSound(){
     const sound = new Audio(buttonClickSoundPath);
-    sound.volume = 0.45;
+    sound.volume = uiSoundVolume;
     sound.play().catch(() => {});
+}
+
+function startBackgroundMusic(){
+    if (!backgroundMusicAudio) {
+        backgroundMusicAudio = new Audio('./Sound/BackgroundMusic.mp3');
+        backgroundMusicAudio.loop = true;
+    }
+
+    backgroundMusicAudio.volume = document.getElementById('backgroundStart') && document.getElementById('typedOutput')
+        ? introBackgroundMusicVolume
+        : backgroundMusicVolume;
+
+    if (backgroundMusicAudio.paused) {
+        backgroundMusicAudio.play().catch(() => {});
+    }
 }
 
 function startRoom3BackgroundSound(){
@@ -35,22 +60,88 @@ function stopRoom3BackgroundSound(){
     room3BackgroundAudio.currentTime = 0;
 }
 
-function startIntroKeyboardSound(){
+function ensureIntroKeyboardAudio(){
     if (!introKeyboardAudio) {
         introKeyboardAudio = new Audio('./Sound/KeyboardClicking.mp3');
         introKeyboardAudio.loop = true;
-        introKeyboardAudio.volume = 0.45;
+        introKeyboardAudio.volume = uiSoundVolume;
     }
+}
 
-    introKeyboardAudio.currentTime = 0;
-    introKeyboardAudio.play().catch(() => {});
+function primeIntroKeyboardSound(){
+    ensureIntroKeyboardAudio();
+    introKeyboardAudio.volume = 0;
+
+    introKeyboardAudio.play()
+        .then(() => {
+            introKeyboardAudio.pause();
+            introKeyboardAudio.currentTime = 0;
+            introKeyboardAudio.volume = uiSoundVolume;
+        })
+        .catch(() => {
+            introKeyboardAudio.volume = uiSoundVolume;
+        });
+}
+
+function startIntroKeyboardSound(){
+    ensureIntroKeyboardAudio();
+    introKeyboardAudio.volume = uiSoundVolume;
+
+    if (introKeyboardAudio.paused) {
+        introKeyboardAudio.play().catch(() => {});
+    }
+}
+
+function pauseIntroKeyboardSound(){
+    if (!introKeyboardAudio) return;
+
+    introKeyboardAudio.pause();
 }
 
 function stopIntroKeyboardSound(){
+    stopIntroKeyboardMonitor();
     if (!introKeyboardAudio) return;
 
     introKeyboardAudio.pause();
     introKeyboardAudio.currentTime = 0;
+}
+
+function startIntroKeyboardMonitor(){
+    stopIntroKeyboardMonitor();
+
+    let output = document.getElementById('typedOutput');
+    if (!output) return;
+
+    introKeyboardLastText = output.textContent;
+    introKeyboardLastChange = Date.now();
+
+    introKeyboardMonitor = setInterval(() => {
+        let typedOutput = document.getElementById('typedOutput');
+        if (!typedOutput) {
+            stopIntroKeyboardSound();
+            return;
+        }
+
+        let currentText = typedOutput.textContent;
+
+        if (currentText !== introKeyboardLastText) {
+            introKeyboardLastText = currentText;
+            introKeyboardLastChange = Date.now();
+            startIntroKeyboardSound();
+            return;
+        }
+
+        if (Date.now() - introKeyboardLastChange > 140) {
+            pauseIntroKeyboardSound();
+        }
+    }, 45);
+}
+
+function stopIntroKeyboardMonitor(){
+    if (!introKeyboardMonitor) return;
+
+    clearInterval(introKeyboardMonitor);
+    introKeyboardMonitor = null;
 }
 
 function openHowTo(){
@@ -147,14 +238,15 @@ function showRoom1Tip(){
 function StartGame(){
     stopRoom3BackgroundSound();
     stopIntroKeyboardSound();
+    primeIntroKeyboardSound();
     document.body.innerHTML = 
     `<div id="backgroundStart">
         <div id="typedOutput"></div>
     </div>`;
+    startBackgroundMusic();
 
 
     setTimeout(() => {
-        startIntroKeyboardSound();
         const typed = new Typed('#typedOutput', {
             strings: ['Willkommen zu Web Escape!',
                       'Du hast versucht dich in das System einzuloggen, aber es ist etwas schief gelaufen.',
@@ -170,6 +262,7 @@ function StartGame(){
             startDelay: 1000,
             loop: false,
             showCursor: false,
+            onBegin: startIntroKeyboardMonitor,
             onComplete: stopIntroKeyboardSound
         });
 }, 100);
@@ -261,12 +354,12 @@ function showLoadingScreen(nextLevel){
 
         new Typed('#typedOutput', {
             strings: [
+                'Loading.',
+                'Loading..',
                 'Loading...',
                 'Loading..',
                 'Loading.',
-                'Loading...',
                 'Loading..',
-                'Loading.',
                 'Almost there...'
             ],
             typeSpeed: 50,
@@ -326,6 +419,9 @@ function backToStart(){
 function StartFirstLevel(){
     stopRoom3BackgroundSound();
     stopIntroKeyboardSound();
+    startBackgroundMusic();
+    if (typeof solvedRoom4 !== 'undefined') solvedRoom4 = {};
+    if (typeof room4RobotCommands !== 'undefined') room4RobotCommands = [];
     document.body.innerHTML = 
     `<div id="backgroundFirstRoom">
         <div id="firstLevel"></div>
@@ -355,7 +451,7 @@ function checkPassword(){
     }
 }
 
-let timerSeconds = 1800;
+let timerSeconds = maxTimerSeconds;
 let timerInterval = null;
 
 function startTimer() {
@@ -370,8 +466,7 @@ function startTimer() {
                 localStorage.setItem('timerSeconds', timerSeconds);
             } else {
                 stopTimer();
-                alert('Zeit abgelaufen!');
-                backToStart();
+                showLoseScreen();
             }
         }, 1000);
     }
@@ -404,7 +499,7 @@ function completeTimer() {
     stopTimer();
     let name = localStorage.getItem('playerName') || 'Spieler';
     saveScore(name, timerSeconds);
-    showComplete();
+    showWinScreen();
     localStorage.removeItem('timerSeconds');
 }
 
@@ -416,27 +511,55 @@ function saveScore(name, time) {
     localStorage.setItem('scores', JSON.stringify(scores));
 }
 
-function showComplete() {
-    let min = Math.floor(timerSeconds / 60);
-    let sec = timerSeconds % 60;
-    let timeText = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-    
+function getUsedTimeText() {
+    let usedSeconds = Math.max(0, maxTimerSeconds - timerSeconds);
+    let min = Math.floor(usedSeconds / 60);
+    let sec = usedSeconds % 60;
+    return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+}
+
+function showWinScreen() {
+    stopRoom3BackgroundSound();
+    stopIntroKeyboardSound();
+    let timeText = getUsedTimeText();
+
     document.body.innerHTML = `
-        <div id="backgroundFinish">
-                <button onclick="openLeaderBoard()" 
-                        style="background: rgba(0, 0, 0, 0.8); border: 3px solid #00ff41; 
-                               border-radius: 10px; padding: 15px 40px; margin-top: 30px; 
-                               font-size: 18px; font-weight: bold; color: #00ff41; cursor: pointer;">
-                    Zum Leaderboard
-                </button>
+        <div id="backgroundFinish" class="winScreen">
+            <div id="endScreenPanel">
+                <div id="endScreenTimeLabel">Zeit gebraucht</div>
+                <div id="endScreenTime">${timeText}</div>
+                <button id="endScreenButton" onclick="openLeaderBoard()">Leaderboard</button>
+            </div>
+        </div>
+    `;
+}
+
+function showLoseScreen() {
+    stopRoom3BackgroundSound();
+    stopIntroKeyboardSound();
+    localStorage.removeItem('timerSeconds');
+
+    document.body.innerHTML = `
+        <div id="backgroundFinish" class="loseScreen">
+            <div id="endScreenPanel">
+                <div id="endScreenTimeLabel">Zeit abgelaufen</div>
+                <div id="endScreenTime">${formatTime(maxTimerSeconds)}</div>
+                <button id="endScreenButton" onclick="backToStart()">Neu starten</button>
+            </div>
         </div>
     `;
 }
 
 function resetTimer() {
     stopTimer();
-    timerSeconds = 1800;
+    timerSeconds = maxTimerSeconds;
     localStorage.removeItem('timerSeconds');
+}
+
+function formatTime(seconds) {
+    let min = Math.floor(seconds / 60);
+    let sec = seconds % 60;
+    return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
 }
 
 function addTimer() {

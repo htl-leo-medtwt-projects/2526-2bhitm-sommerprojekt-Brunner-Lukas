@@ -63,8 +63,65 @@ function StartThirdLevel(){
                 <div id="asciiOverlayClose" onclick="hideAsciiTable()">[ CLOSE ]</div>
             </div>
         </div>
+        ${thirdRoomInfoButton()}
     </div>`;
     addTimer();
+}
+
+const room3Tips = [
+    'Wandle jeden Binärcode zuerst in eine Dezimalzahl um. Danach suchst du diese Zahl in der ASCII-Tabelle.',
+    'Die drei übersetzten ASCII-Zeichen ergeben zusammen das Wort für das erste Eingabefeld.',
+    'Beim Code-Stück ist wichtig, welcher Wert die if-Bedingung wahr macht. Der gesuchte Server-Code steht bereits im Code.'
+];
+
+let currentRoom3Tip = 0;
+
+function thirdRoomInfoButton(){
+    return `<button id="room1InfoButton" onclick="openRoom3Info()" aria-label="Info zu Raum 3">I</button>`;
+}
+
+function openRoom3Info(){
+    closeRoom3Info();
+    currentRoom3Tip = 0;
+
+    document.body.insertAdjacentHTML('beforeend', `
+        <div id="room1InfoOverlay">
+            <div id="room1InfoPanel">
+                <button id="room1InfoClose" onclick="closeRoom3Info()" aria-label="Info schließen">X</button>
+                <p class="room1InfoKicker">Raum 3</p>
+                <h2>Das Herz des Mainframes</h2>
+                <p>Die visuelle Fassade bricht weg und du stehst tief im Serverraum. Das Summen der Kühlung liegt in der Luft, während das System in seiner reinsten Sprache spricht: Einsen und Nullen.</p>
+
+                <h3>Deine Mission</h3>
+                <p><strong>Die Übersetzung:</strong> Wandle die Binärcodes in Dezimalzahlen um und übersetze diese mit der ASCII-Tabelle in lesbare Zeichen.</p>
+                <p><strong>Die Code-Extraktion:</strong> Analysiere das Code-Stück und finde heraus, welcher Wert die Funktion freischaltet.</p>
+
+                <h3>Hinweis vom System</h3>
+                <p class="systemHint">"Maschinen denken nicht in Worten. Sie denken in Strom und kein Strom. Finde die Logik im Quelltext, übersetze das Flüstern der Server und der Weg zum Kern wird sich offenbaren."</p>
+
+                <div id="room1TipBox">
+                    <button id="room1TipButton" onclick="showRoom3Tip()">Tipp anzeigen</button>
+                    <p id="room1TipText">Klicke auf den Tipp-Button, wenn du einen Hinweis brauchst.</p>
+                </div>
+            </div>
+        </div>
+    `);
+    addTimer();
+}
+
+function closeRoom3Info(){
+    let overlay = document.getElementById('room1InfoOverlay');
+    if (overlay) overlay.remove();
+}
+
+function showRoom3Tip(){
+    let tipText = document.getElementById('room1TipText');
+    let tipButton = document.getElementById('room1TipButton');
+    if (!tipText || !tipButton) return;
+
+    tipText.textContent = room3Tips[currentRoom3Tip];
+    currentRoom3Tip = (currentRoom3Tip + 1) % room3Tips.length;
+    tipButton.textContent = currentRoom3Tip === 0 ? 'Tipps neu starten' : 'Nächster Tipp';
 }
 
 function showAsciiTable(){
