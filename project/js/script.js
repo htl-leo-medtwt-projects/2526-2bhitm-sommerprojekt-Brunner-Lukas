@@ -3,6 +3,9 @@ const uiSoundVolume = 1;
 const backgroundMusicVolume = 0.16;
 const introBackgroundMusicVolume = 0.07;
 const maxTimerSeconds = 1800;
+const levelTransitionDuration = 8500;
+const levelTransitionFadeDuration = 1200;
+const levelArrivalFadeDuration = 1300;
 let backgroundMusicAudio = null;
 let room3BackgroundAudio = null;
 let introKeyboardAudio = null;
@@ -178,7 +181,7 @@ function openHowTo(){
 }
 
 const room1Tips = [
-    'Der Username: Gib deinen Namen ein, um die Session zu starten.',
+    'Der Benutzername: Gib deinen Namen ein, um die Session zu starten.',
     'Das Passwort: Du kennst es nicht? Keine Panik. Ein falscher Versuch könnte eine Schwachstelle im System offenlegen.',
     'Die Konsole: Achte auf visuelle Veränderungen. Wenn das System einen Fehler meldet, erscheint vielleicht ein direkter Zugang zu den Entwickler-Logs. Ein Klick darauf verrät dir mehr, als die Admins von Momento eigentlich zulassen wollten.'
 ];
@@ -193,7 +196,7 @@ function openRoom1Info(){
     closeRoom1Info();
     currentRoom1Tip = 0;
 
-    // Mit hilfe von Ki gemacht worden aber nur für bug fixes
+    // Mit Hilfe von KI erstellt; nur für Bugfixes verwendet.
     document.body.insertAdjacentHTML('beforeend', `
         <div id="room1InfoOverlay">
             <div id="room1InfoPanel">
@@ -203,7 +206,7 @@ function openRoom1Info(){
                 <p>Du stehst vor der ersten Hürde. Das System hat dich erkannt, aber es vertraut dir noch nicht. Um tiefer in die Schaltkreise vorzudringen, musst du dir eine digitale Identität innerhalb des Momento-Netzwerks sichern.</p>
 
                 <h3>Deine Mission</h3>
-                <p><strong>Identifikation:</strong> Hinterlege deinen Usernamen im System. Das System wird dich ab jetzt unter diesem Namen führen (gespeichert in deinem localStorage).</p>
+                <p><strong>Identifikation:</strong> Hinterlege deinen Benutzernamen im System. Das System wird dich ab jetzt unter diesem Namen führen (gespeichert in deinem localStorage).</p>
                 <p><strong>Authentifizierung:</strong> Finde das Passwort für den Zugang.</p>
 
                 <h3>Hinweis vom System</h3>
@@ -249,10 +252,10 @@ function StartGame(){
     setTimeout(() => {
         const typed = new Typed('#typedOutput', {
             strings: ['Willkommen zu Web Escape!',
-                      'Du hast versucht dich in das System einzuloggen, aber es ist etwas schief gelaufen.',
-                      'Du bist in dem System gefangen und musst nun versuchen zu entkommen.',
-                      'Logge dich mit deinem Namen als Username ein, damit du Zugriff auf das System hast und es verlassen kannst.',
-                      'Ich hoffe du hast dein Passwort nicht vergessen',
+                      'Du hast versucht, dich in das System einzuloggen, aber es ist etwas schiefgelaufen.',
+                      'Du bist im System gefangen und musst nun versuchen, zu entkommen.',
+                      'Logge dich mit deinem Namen als Benutzernamen ein, damit du Zugriff auf das System hast und es verlassen kannst.',
+                      'Ich hoffe, du hast dein Passwort nicht vergessen!',
                       'Aber das System wird dir nicht so einfach Zugriff gewähren.',
                       'Viel Erfolg!'
             ],
@@ -269,7 +272,7 @@ function StartGame(){
 setTimeout(() => {
     stopIntroKeyboardSound();
     StartFirstLevel();
-}, 50000);
+}, 60000);
 }
 
 
@@ -280,11 +283,11 @@ function getError(){
     `<div id="backgroundFirstRoom">
         <div id="firstLevel"></div>
         <div id="logo"></div>
-        <div id="console" onclick="openConsole()">console</div>
-        <div id="text">Login to your account</div>
-        <input type="text" id="userNameInput" placeholder="Username">
-        <div id="error">Invalid password</div>
-        <input type="text" id="passwordInput" placeholder="Password">
+        <div id="console" onclick="openConsole()">Konsole</div>
+        <div id="text">Melde dich an</div>
+        <input type="text" id="userNameInput" placeholder="Benutzername">
+        <div id="error">Ungültiges Passwort</div>
+        <input type="text" id="passwordInput" placeholder="Passwort">
         <div id="loginButton" onclick="getError()"></div>
         ${firstRoomInfoButton()}
     </div>`;
@@ -299,10 +302,10 @@ function openConsole(){
         <div id="consoleOpen">
             <div id="consoleInput"></div>
         </div>
-        <div id="text">Login to your account</div>
-        <input type="text" id="userNameInput" placeholder="Username">
-        <div id="error">Invalid password</div>
-        <input type="text" id="passwordInput" placeholder="Password">
+        <div id="text">Melde dich an</div>
+        <input type="text" id="userNameInput" placeholder="Benutzername">
+        <div id="error">Ungültiges Passwort</div>
+        <input type="text" id="passwordInput" placeholder="Passwort">
         <div id="loginButton" onclick="checkPassword()"></div>
         ${firstRoomInfoButton()}
     </div>`;
@@ -335,10 +338,34 @@ function finishGame(){
     completeTimer();
 }
 
-function showLoadingScreen(nextLevel){
+function fadeIntoLevel(){
+    const fade = document.createElement('div');
+    fade.id = 'levelArrivalFade';
+    document.body.appendChild(fade);
+
+    requestAnimationFrame(() => {
+        fade.classList.add('levelArrivalFadeOut');
+    });
+
+    setTimeout(() => {
+        if (fade) fade.remove();
+    }, levelArrivalFadeDuration);
+}
+
+function enterNextLevel(nextLevel){
+    nextLevel();
+    fadeIntoLevel();
+}
+
+function showLoadingScreen(nextLevel, nextRoomName = 'Nächster Raum'){
     document.body.innerHTML =
     `<div id="backgroundStart" class="loadingScreen">
-        <div id="typedOutput" class="loadingScreenText"></div>
+        <div id="transitionPanel">
+            <div id="transitionLabel">Level-Übergang</div>
+            <div id="typedOutput" class="loadingScreenText"></div>
+            <div id="transitionBar"><div id="transitionBarFill"></div></div>
+            <div id="transitionDestination">${nextRoomName}</div>
+        </div>
     </div>`;
     addTimer();
     updateTimer();
@@ -348,44 +375,46 @@ function showLoadingScreen(nextLevel){
         if (!output) return;
 
         if (typeof Typed === 'undefined') {
-            output.textContent = 'Loading...';
+            output.textContent = 'Verbindung wird vorbereitet...';
             return;
         }
 
         new Typed('#typedOutput', {
             strings: [
-                'Loading.',
-                'Loading..',
-                'Loading...',
-                'Loading..',
-                'Loading.',
-                'Loading..',
-                'Almost there...'
+                'Verbindung wird vorbereitet.',
+                'Datenstrom wird stabilisiert...',
+                'Sicherheitsprotokolle werden umgangen...',
+                'Raum wird geladen...',
+                'Gleich geht es weiter...'
             ],
-            typeSpeed: 50,
-            backSpeed: 25,
-            backDelay: 500,
-            startDelay: 100,
+            typeSpeed: 58,
+            backSpeed: 18,
+            backDelay: 850,
+            startDelay: 250,
             loop: false,
             showCursor: false
         });
     }, 100);
 
-    setTimeout(nextLevel, 6000);
+    setTimeout(() => {
+        const loadingScreen = document.querySelector('.loadingScreen');
+        if (loadingScreen) loadingScreen.classList.add('loadingScreenExit');
+        setTimeout(() => enterNextLevel(nextLevel), levelTransitionFadeDuration);
+    }, levelTransitionDuration);
 }
 
 function LoadingScreenSecondRoom(){
     stopRoom3BackgroundSound();
-    showLoadingScreen(StartSecondLevel);
+    showLoadingScreen(StartSecondLevel, 'Raum 2: Datenströme');
 }
 
 function LoadingScreenThirdRoom(){
-    showLoadingScreen(StartThirdLevel);
+    showLoadingScreen(StartThirdLevel, 'Raum 3: Mainframe');
 }
 
 function LoadingScreenFourthRoom(){
     stopRoom3BackgroundSound();
-    showLoadingScreen(StartFourthLevel);
+    showLoadingScreen(StartFourthLevel, 'Raum 4: Finale');
 }
 
 
@@ -426,9 +455,9 @@ function StartFirstLevel(){
     `<div id="backgroundFirstRoom">
         <div id="firstLevel"></div>
         <div id="logo"></div>
-        <div id="textFirstLevel">Login to your account</div>
-        <input type="text" id="userNameInput" placeholder="Username">
-        <input type="text" id="passwordInput" placeholder="Password">
+        <div id="textFirstLevel">Melde dich an</div>
+        <input type="text" id="userNameInput" placeholder="Benutzername">
+        <input type="text" id="passwordInput" placeholder="Passwort">
         <div id="loginButton" onclick="saveUsername(); getError();"></div>
         ${firstRoomInfoButton()}
     </div>`;

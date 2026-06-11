@@ -97,7 +97,7 @@ function openRoom3Info(){
                 <p><strong>Die Code-Extraktion:</strong> Analysiere das Code-Stück und finde heraus, welcher Wert die Funktion freischaltet.</p>
 
                 <h3>Hinweis vom System</h3>
-                <p class="systemHint">"Maschinen denken nicht in Worten. Sie denken in Strom und kein Strom. Finde die Logik im Quelltext, übersetze das Flüstern der Server und der Weg zum Kern wird sich offenbaren."</p>
+                <p class="systemHint">"Maschinen denken nicht in Worten. Sie denken in Signalen und Pausen. Finde die Logik im Quelltext, übersetze das Flüstern der Server und der Weg zum Kern wird sich offenbaren."</p>
 
                 <div id="room1TipBox">
                     <button id="room1TipButton" onclick="showRoom3Tip()">Tipp anzeigen</button>
@@ -137,14 +137,14 @@ function showFirstRiddleTip(){
     <div id="backgroundThirdRoom">
         <div id="StickyNoteTip1">
             <div id="text">
-                <div id="closeTip" onclick="StartThirdLevel()">← Back</div>
-                <p><b>Hint: Binary → Decimal</b></p>
-                <p>Multiply each bit by 2 to the power of its position (right = 0), then add all results.</p>
-                <p>Example:<br>
+                <div id="closeTip" onclick="StartThirdLevel()">← Zurück</div>
+                <p><b>Hinweis: Binär → Dezimal</b></p>
+                <p>Multipliziere jedes Bit mit 2 hoch seiner Position (rechts = 0) und addiere anschließend alle Ergebnisse.</p>
+                <p>Beispiel:<br>
                 1011 =<br>
                 (1×2³)+(0×2²)<br>+(1×2¹)+(1×2⁰)<br>
                 = 8+0+2+1 = <b>11</b></p>
-                <p>Then use the ASCII table to find the letter!</p>
+                <p>Nutze danach die ASCII-Tabelle, um den Buchstaben zu finden!</p>
             </div>
         </div>
     </div>`;
@@ -156,12 +156,12 @@ function showSecondRiddleTip(){
     <div id="backgroundThirdRoom">
         <div id="StickyNoteTip1">
             <div id="text">
-                <div id="closeTip" onclick="StartThirdLevel()">← Back</div>
-                <p><b>Hint: The Code</b></p>
-                <p>The variable starts with one value...</p>
-                <p>The if-check expects a different one.</p>
-                <p>What value makes the condition <b>true</b>?</p>
-                <p>The answer is already written in the code.</p>
+                <div id="closeTip" onclick="StartThirdLevel()">← Zurück</div>
+                <p><b>Hinweis: Der Code</b></p>
+                <p>Die Variable startet mit einem Wert...</p>
+                <p>Die if-Abfrage erwartet aber einen anderen.</p>
+                <p>Welcher Wert macht die Bedingung <b>wahr</b>?</p>
+                <p>Die Antwort steht bereits im Code.</p>
             </div>
         </div>
     </div>`;
@@ -177,7 +177,7 @@ function checkThirdLevel(){
         stopRoom3BackgroundSound();
         LoadingScreenFourthRoom();
     } else {
-        error.textContent = 'ACCESS DENIED – check your answers.';
+        error.textContent = 'ZUGRIFF VERWEIGERT - überprüfe deine Antworten.';
         setTimeout(() => { error.textContent = ''; }, 2500);
     }
 }

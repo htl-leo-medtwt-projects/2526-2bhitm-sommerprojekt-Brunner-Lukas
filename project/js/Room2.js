@@ -27,9 +27,9 @@ function ShowProfile(){
             <div id="profileName">Max Mustermann</div>
         </div>
             <div id="CodeInput">
-                <input type="text" id="codeInputField" placeholder="Enter code">
+                <input type="text" id="codeInputField" placeholder="Code eingeben">
             </div>
-            <button id="submitCodeButton" onclick="checkCode()">Submit</button>
+            <button id="submitCodeButton" onclick="checkCode()">Prüfen</button>
             ${secondRoomInfoButton()}
     </div>`;
     addTimer();
@@ -72,7 +72,7 @@ function openRoom2Info(){
                 <p><strong>Die Verifizierung:</strong> Rufe das Profil auf und gib die gesammelten Zeichen in der richtigen Reihenfolge ein.</p>
 
                 <h3>Hinweis vom System</h3>
-                <p class="systemHint">"Ein Bild sagt mehr als tausend Worte, aber für ein geschultes Auge transportiert es Daten. Schaue genau hin, wo die Pixel Pixel sein sollten."</p>
+                <p class="systemHint">"Ein Bild sagt mehr als tausend Worte, aber für ein geschultes Auge transportiert es Daten. Schaue genau hin, wo Pixel nicht nur Pixel sein sollten."</p>
 
                 <div id="room1TipBox">
                     <button id="room1TipButton" onclick="showRoom2Tip()">Tipp anzeigen</button>

@@ -25,7 +25,7 @@ let room4Pc = {
                 title: "Keks",
                 headline: "Die Keks-Funktion",
                 type: "order",
-                text: "Sortiere die Funktion so, dass sie einen fertigen Keks zurueckgibt.",
+                text: "Sortiere die Funktion so, dass sie einen fertigen Keks zurückgibt.",
                 pieces: ["}", "return \"Keks fertig\";", "function bake(temp)", "{"],
                 solution: ["function bake(temp)", "{", "return \"Keks fertig\";", "}"],
                 code: "R4-03"
@@ -34,7 +34,7 @@ let room4Pc = {
                 title: "HTML",
                 headline: "HTML-Struktur",
                 type: "order",
-                text: "Baue eine einfache Liste. Die Tags muessen richtig geschachtelt sein.",
+                text: "Baue eine einfache Liste. Die Tags müssen richtig geschachtelt sein.",
                 pieces: ["</ul>", "<li>Item</li>", "<ul>"],
                 solution: ["<ul>", "<li>Item</li>", "</ul>"],
                 code: "R4-04"
@@ -56,7 +56,7 @@ let room4Pc = {
         quests: [
             {
                 title: "Index",
-                headline: "Der Off-by-One Bug",
+                headline: "Der Off-by-One-Bug",
                 type: "input",
                 text: "Ein Array hat 3 Elemente: [\"Gold\", \"Silber\", \"Bronze\"]. Der Code sagt console.log(items[3]). Welche Zahl muss statt 3 stehen?",
                 answers: ["2"],
@@ -64,9 +64,9 @@ let room4Pc = {
             },
             {
                 title: "Boolean",
-                headline: "Boolean-Tuerschloss",
+                headline: "Boolean-Türschloss",
                 type: "boolean",
-                text: "Das Schloss oeffnet sich nur, wenn (A && B) || C true ergibt.",
+                text: "Das Schloss öffnet sich nur, wenn (A && B) || C true ergibt.",
                 code: "R4-07"
             },
             {
@@ -81,7 +81,7 @@ let room4Pc = {
                 title: "Fibonacci",
                 headline: "Die Fibonacci-Zahl",
                 type: "input",
-                text: "Ergaenze die Zahlenreihe: 1, 1, 2, 3, 5, 8, ?",
+                text: "Ergänze die Zahlenreihe: 1, 1, 2, 3, 5, 8, ?",
                 answers: ["13"],
                 code: "9A2"
             },
@@ -89,7 +89,7 @@ let room4Pc = {
                 title: "Regex",
                 headline: "Regex-Suche",
                 type: "choice",
-                text: "Welcher regulaere Ausdruck findet alle Zahlen in einem Text?",
+                text: "Welcher reguläre Ausdruck findet alle Zahlen in einem Text?",
                 choices: ["[a-z]+", "\\d+", "\\s+", "true|false"],
                 answer: "\\d+",
                 code: "R4-10"
@@ -104,7 +104,7 @@ let room4Pc = {
                 title: "Inspektor",
                 headline: "Der Inspektor",
                 type: "inspect",
-                text: "Die Loesung steht im Schatten. Nutze den eingebauten Inspektor und suche im HTML-Ausschnitt.",
+                text: "Die Lösung steht im Schatten. Nutze den eingebauten Inspektor und suche im HTML-Ausschnitt.",
                 answers: ["schatten-42"],
                 code: "R4-11"
             },
@@ -112,14 +112,14 @@ let room4Pc = {
                 title: "Konsole",
                 headline: "Die verborgene Konsole",
                 type: "terminal",
-                text: "Rede mit dem eingebauten Terminal. Fuehre hello() aus und gib das Passwort hier ein.",
+                text: "Rede mit dem eingebauten Terminal. Führe hello() aus und gib das Passwort hier ein.",
                 command: "hello()",
                 answers: ["konsole-73"],
                 code: "R4-12"
             },
             {
                 title: "Farbe",
-                headline: "Farbcodes raten",
+                headline: "Farbcodes erraten",
                 type: "color",
                 text: "Ein Feld hat die Hintergrundfarbe #00FF00. Welche Farbe ist das?",
                 answers: ["green", "gruen", "grün", "neon"],
@@ -137,7 +137,7 @@ let room4Pc = {
                 title: "Roboter",
                 headline: "Der Pfad des Roboters",
                 type: "robot",
-                text: "Waehle die Befehle in der richtigen Reihenfolge, damit der Roboter das Ziel erreicht.",
+                text: "Wähle die Befehle in der richtigen Reihenfolge, damit der Roboter das Ziel erreicht.",
                 pieces: ["move()", "turnRight()", "turnLeft()"],
                 solution: ["move()", "turnRight()", "move()"],
                 code: "R4-15"
@@ -179,7 +179,7 @@ function openRoom4Pc(pcName, questNumber = 0){
         nav += `<div class="room4QuestTab${active}${solved}" onclick="openRoom4Pc('${pcName}', ${i})">${pc.quests[i].title}</div>`;
     }
 
-    let questLockText = solvedRoom4[pcName + questNumber] ? "Code unlocked." : "Locked until solved.";
+    let questLockText = solvedRoom4[pcName + questNumber] ? "Code freigeschaltet." : "Gesperrt, bis das Rätsel gelöst ist.";
 
     overlay.style.display = "block";
     overlay.innerHTML =
@@ -197,8 +197,8 @@ function openRoom4Pc(pcName, questNumber = 0){
             <div id="room4QuestLockStatus">${questLockText}</div>
         </div>
         <div id="room4CodeBox">
-            <h3>CODE PARTS</h3>
-            <p>All code parts on this computer.</p>
+            <h3>CODE-TEILE</h3>
+            <p>Alle Code-Teile auf diesem Computer.</p>
             <div id="room4CodeParts">${getRoom4CodeParts(pcName, questNumber)}</div>
         </div>
     </div>`;
@@ -236,7 +236,7 @@ function getRoom4Quest(pcName, questNumber){
         for (let i = 0; i < quest.solution.length; i++) {
             html += `<div class="room4Slot" data-piece="" ondragover="allowRoom4Drop(event)" ondrop="dropRoom4Piece(event)">${i + 1}</div>`;
         }
-        html += `</div><div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+        html += `</div><div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">PRÜFEN</div>`;
     }
 
     if (quest.type === "css") {
@@ -245,9 +245,9 @@ function getRoom4Quest(pcName, questNumber){
             html += `<div class="room4Piece" draggable="true" data-piece="${quest.pieces[i]}" ondragstart="dragRoom4Piece(event)">${quest.pieces[i]}</div>`;
         }
         html += `</div>
-        <div id="cssButton" ondragover="allowRoom4Drop(event)" ondrop="dropRoom4Css(event)">DROP CSS HERE</div>
+        <div id="cssButton" ondragover="allowRoom4Drop(event)" ondrop="dropRoom4Css(event)">CSS HIER ABLEGEN</div>
         <div id="cssList"></div>
-        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">PRÜFEN</div>`;
     }
 
     if (quest.type === "choice") {
@@ -262,8 +262,8 @@ function getRoom4Quest(pcName, questNumber){
         if (quest.type === "color") {
             html += `<div id="colorPreview">#00FF00</div>`;
         }
-        html += `<input type="text" id="room4Answer" placeholder="Enter answer" onkeydown="room4Enter(event, '${pcName}', ${questNumber})">
-        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+        html += `<input type="text" id="room4Answer" placeholder="Antwort eingeben" onkeydown="room4Enter(event, '${pcName}', ${questNumber})">
+        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">PRÜFEN</div>`;
     }
 
     if (quest.type === "boolean") {
@@ -273,7 +273,7 @@ function getRoom4Quest(pcName, questNumber){
             <label>C <input type="checkbox" id="switchC"></label>
         </div>
         <div id="logicText">(A && B) || C</div>
-        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">PRÜFEN</div>`;
     }
 
     if (quest.type === "zindex") {
@@ -283,7 +283,7 @@ function getRoom4Quest(pcName, questNumber){
             <div id="frontLayer"></div>
         </div>
         <input type="number" id="room4Answer" placeholder="z-index" oninput="changeZIndex()" onkeydown="room4Enter(event, '${pcName}', ${questNumber})">
-        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">PRÜFEN</div>`;
     }
 
     if (quest.type === "inspect") {
@@ -300,7 +300,7 @@ function getRoom4Quest(pcName, questNumber){
 &lt;/section&gt;</pre>
         </div>
         <input type="text" id="room4Answer" placeholder="Code aus dem Inspektor" onkeydown="room4Enter(event, '${pcName}', ${questNumber})">
-        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">PRÜFEN</div>`;
     }
 
     if (quest.type === "terminal") {
@@ -309,11 +309,11 @@ function getRoom4Quest(pcName, questNumber){
             <div id="room4ConsoleLine">
                 <span>&gt;</span>
                 <input type="text" id="room4CommandInput" placeholder="Befehl eingeben">
-                <button id="room4RunCommand" onclick="runRoom4Command('${pcName}', ${questNumber})">RUN</button>
+                <button id="room4RunCommand" onclick="runRoom4Command('${pcName}', ${questNumber})">START</button>
             </div>
         </div>
         <input type="text" id="room4Answer" placeholder="Passwort" onkeydown="room4Enter(event, '${pcName}', ${questNumber})">
-        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>`;
+        <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">PRÜFEN</div>`;
     }
 
     if (quest.type === "robot") {
@@ -380,7 +380,7 @@ function runRoom4Command(pcName, questNumber){
     if (input.value.trim().toLowerCase() === quest.command.toLowerCase()) {
         output.innerHTML = `&gt; ${getRoom4Text(input.value)}<br>Passwort: KONSOLE-73`;
     } else {
-        output.innerHTML = `&gt; ${getRoom4Text(input.value)}<br>Unknown command.`;
+        output.innerHTML = `&gt; ${getRoom4Text(input.value)}<br>Unbekannter Befehl.`;
     }
 }
 
@@ -396,9 +396,9 @@ function getRoom4RobotHtml(pcName, questNumber){
         <div id="room4RobotGrid">${getRoom4RobotGrid()}</div>
         <div id="room4RobotPanel">
             <div id="room4RobotCommands">${commandButtons}</div>
-            <div id="room4RobotSequence">Sequence: -</div>
-            <button class="room4RobotReset" onclick="resetRoom4Robot('${pcName}', ${questNumber})">RESET</button>
-            <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">CHECK</div>
+            <div id="room4RobotSequence">Reihenfolge: -</div>
+            <button class="room4RobotReset" onclick="resetRoom4Robot('${pcName}', ${questNumber})">ZURÜCKSETZEN</button>
+            <div class="room4Check" onclick="checkRoom4('${pcName}', ${questNumber})">PRÜFEN</div>
         </div>
     </div>`;
 }
@@ -469,7 +469,7 @@ function updateRoom4RobotView(){
     let sequence = document.getElementById("room4RobotSequence");
 
     if (grid) grid.innerHTML = getRoom4RobotGrid();
-    if (sequence) sequence.textContent = `Sequence: ${room4RobotCommands.length ? room4RobotCommands.join(" -> ") : "-"}`;
+    if (sequence) sequence.textContent = `Reihenfolge: ${room4RobotCommands.length ? room4RobotCommands.join(" -> ") : "-"}`;
 }
 
 function checkRoom4(pcName, questNumber, choiceAnswer = ""){
@@ -531,7 +531,7 @@ function checkRoom4(pcName, questNumber, choiceAnswer = ""){
         }
         openRoom4Pc(pcName, questNumber);
     } else {
-        document.getElementById("room4Error").innerHTML = "Wrong answer. Try again.";
+        document.getElementById("room4Error").innerHTML = "Falsche Antwort. Versuch es erneut.";
         setTimeout(() => {
             if (document.getElementById("room4Error")) document.getElementById("room4Error").innerHTML = "";
         }, 2000);
@@ -551,7 +551,7 @@ function isRoom4Complete(){
 const room4Tips = [
     'Du musst nicht alles in einer festen Reihenfolge lösen. Nutze die Tabs und arbeite zuerst an den Rätseln, die dir klar sind.',
     'Gelöste Rätsel färben sich um und schalten im Code-Bereich ihren Teil frei.',
-    'Für Drag-and-drop-Aufgaben zählt die Reihenfolge der Slots. Beim Roboter zählt die Reihenfolge deiner gewählten Befehle.'
+    'Für Drag-and-Drop-Aufgaben zählt die Reihenfolge der Slots. Beim Roboter zählt die Reihenfolge deiner gewählten Befehle.'
 ];
 
 let currentRoom4Tip = 0;
