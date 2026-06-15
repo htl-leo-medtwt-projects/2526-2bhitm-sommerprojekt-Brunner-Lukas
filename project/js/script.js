@@ -394,7 +394,7 @@ function showLoadingScreen(nextLevel, nextRoomName = 'Nächster Raum'){
             loop: false,
             showCursor: false
         });
-    }, 100);
+    }, 150);
 
     setTimeout(() => {
         const loadingScreen = document.querySelector('.loadingScreen');
